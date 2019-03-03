@@ -1,0 +1,415 @@
+/*Stylesheet for MiiSN. Might update to give each page a seperate stylesheet and update references accordingly -OC*/
+
+*{
+    margin: 0; /*Zeroes everything first to ensure no funny buisness -OC*/
+}
+
+body{
+    background-color: #E6E6E6;
+    font-family: Trebuchet MS;
+}
+h2{
+    font-family:Arial, sans-serif;
+}
+header{
+    background-color: #F2F2F2;
+    height: 7em;
+}
+.links{
+    font-size: 1.25em;
+    color: #595959;
+    font-family: Trebuchet MS;
+    text-decoration: none;
+    float:right;
+    margin-left: 1.75em;
+    margin-right: 1.75em;
+    margin-top: 3.5em;
+
+}
+.headerInline{
+    display: inline-block;
+}
+#headerLogo{
+    text-align: left;
+    padding-top: 0.3em;
+    padding-left: 0.5em;
+    font-family: Arial, sans-serif;
+    font-size: 3.5em;
+    font-weight: 100;
+}
+#page{
+    height:100%;
+    background-color: #FFFFFF;
+    margin-left: 7em;
+    margin-right:7em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+
+/*Home Page CSS Start -OC*/
+#mainPage{
+    height: 100%;
+    text-align: center;
+}
+#loginBanner{
+    margin: 0;
+    padding: 5px;
+    font: normal;
+    font-family: Arial, sans-serif;
+    font-size: 8em;
+    font-weight: 100;
+}
+
+#loginBox{ /*This is that center block element with everything inside from the proposal doc -OC*/
+    left: 10px;
+    display: block;
+    display: inline-block;
+    width: 360px;
+    height: 180px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.05em;
+    border-radius: 0.5em;
+    background-color: #FFFFFF;
+    padding:2em;
+}
+
+#loginButton{
+    font-family: Trebuchet MS;
+    background-color:#cccccc;
+    border: solid;
+    border-width: 0;
+    border-radius: 0.25em;
+    width: 10em;
+    height: 2.5em;
+    text-align: center;
+    margin-top: 1em;
+}
+
+#pUsername, #pPassword{
+    font-family: Trebuchet MS;
+    font-size: 1em;
+    text-align: left;
+    padding-left: 0.5em;
+}
+
+#username, #password{
+    margin-bottom: 1em;
+    text-align: left;
+    padding-left: 0.5em;
+    padding-bottom: 0.5em;
+    width: 300px;
+}
+
+#registerLink{
+    text-align: center;
+    padding: 10px;
+}
+/*Registration Page CSS Start -OC*/
+
+.infoSections{
+    padding:3em;
+    padding-top:2em;
+}
+.infoSections h3{
+    font-size: 2em;
+}
+.infoSections td{
+    font-size: 1em;
+    padding: 0.5em;
+}
+
+/*User Selection CSS Start*/
+.channels {
+    width:17em;
+    height:11em;
+    border: solid;
+    border-color: #D9D9D9;
+    border-radius: 1em;
+    display: inline-block;
+    margin:0.25em;
+    background: none;
+    margin-bottom: 0;
+    text-decoration: none;
+    clear: both;
+}
+.menuOption{
+    text-align: center;
+    line-height: 10em;
+}
+.menuLinks{
+    text-decoration: none;
+    color: #404040;
+}
+#panelSection {
+    width:90%;
+    margin: auto;
+    border-color: black;
+    margin-top:2%;
+}
+#menuBody{
+    background-color: #FFFFFF;
+}
+#chanLink {
+    text-decoration: none;
+}
+#menuTable{
+    width:100%;
+    margin:0 auto;
+}
+
+/*Chat Window CSS Start */
+.chatBox{
+    height:60%;
+    width:50%;
+    border:solid;
+    border-color: black;
+    border-radius: 1em;
+    margin-bottom: 10%;
+    visibility: hidden;
+    padding:0.5em;
+}
+.miiInChat{
+    width:19%;
+    height:90%;
+    display: inline-block;
+    margin:0 auto;
+    
+}
+#chatBox1{
+    visibility: visible;
+}
+#chatBox2{
+    visibility: visible;
+}
+#miis{
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 1%;
+}
+#chatBackButton{
+    margin-left:2%;
+    margin-top:0.5%;
+    width:10%;
+    background-color: #FFFFFF;
+    border-color: dodgerblue;
+    color: dodgerblue;
+}
+
+#miiBox{
+    width:80.5em;
+    height:28em;
+    margin:0 auto;
+    margin-top:1%;
+    border: solid;
+    border-color: #595959;
+    background-color: #FFFFFF;
+}
+#bottomDiv{
+    width:95%;
+    height:20%;
+    margin:0 auto;
+    margin-top:1%;
+}
+#chatBox {
+    display: block;
+    float: right;
+    
+}
+#textInput{
+    clear:left;
+}
+#prevChat{
+    float: left;
+    border: solid;
+    border-color: black;
+    width:30em;
+    height: 5em;
+    background-color: #FFFFFF;
+}
+
+/*Customize Mii CSS Start*/
+.sections{
+    border:solid;
+    border-color: black;
+    width:47%;
+    height:90%;
+    margin:0 auto;
+    margin-top:2%;
+}
+.optionSelectors{
+    border:solid;
+    border-color: black;
+    width:25%;
+    height:10%;
+    background-color: #FFFFFF;
+}
+.optionChoices {
+    
+    width:27%;
+    height: 20%;
+    border:solid;
+    border-color: black;
+    display: inline-block;
+    margin:1%;
+}
+.leg{
+    background-color: blue;
+    height: 3em;
+    width: 1em;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+.arm{
+    background-color: red;
+    height: 1em;
+    width: 3em;
+    margin-bottom: 2.5em;
+    
+}
+.torso{
+    display: inline-block;
+}
+#character{
+    margin-top:15%;
+    margin-left:25%;
+}
+#rightArm{
+    position: relative;
+    right:1em;
+}
+#leftArm{
+    position: relative;
+    left:1em;
+}
+#leftLeg{
+    transform: rotate(15deg);
+    margin-right:2%;
+}
+#rightLeg{
+    transform: rotate(-15deg);
+}
+#editSection{
+    margin-right: 0;
+}
+#displaySection{
+    margin-left:0;
+}
+#overallDisplay{
+    display: flex;
+}
+#options{
+    border:solid;
+    border-color: black;
+    width:80%;
+    height:80%;
+    background-color: #FFFFFF;
+    padding:1%;
+    margin:0 auto;
+    
+}
+#selectorInline{
+    width:80%;
+    display: flex;
+    margin:0 auto;
+}
+#characterDisplay{
+    border: solid;
+    border-color: black;
+    background-color: #FFFFFF;
+    width: 90%;
+    height:90%;
+    margin:0 auto;
+    margin-top:2%;
+}
+#overallOptions{
+    margin-top:2%;
+}
+#doneCustomizing{
+    width:15%;
+    height:5%;
+    margin-right: 5%;
+    margin-top: 0.5%;
+    background-color: #FFFFFF;
+    border-color: dodgerblue;
+    color:dodgerblue;
+    float:right;
+}
+#characterHead{
+    background-color: #FFFF99;
+    border-color: #FFFF99;
+    height: 2em;
+    width: 2em;
+    border-radius: 1em;
+    margin-left: 3.25em;
+}
+#characterBody{
+    background-color: red;
+    height: 4em;
+    width: 2em;
+    border-radius: 2em;
+}
+#characterLegs{
+    padding-left: 3em;
+    position: relative;
+    bottom: 1em;
+    
+}
+
+/*Settings CSS Start */
+.settingWork{
+    display: inline-block;
+    border:solid;
+    border-color: black; 
+    height:70%;
+    background-color: #FFFFFF;
+}
+.settingTopicOptions{
+    text-decoration: none;
+    font-size: 20px;
+    color: #595959;
+    
+}
+#settingPage{
+    width:95%;
+    margin:0 auto;
+    margin-top: 2.5%;
+}
+#settingOptionPanel{
+    width:22%;
+    padding:1%;
+    
+}
+#selectedSettingOption{
+    width:70%;
+    float:right;
+    padding:1%;
+}
+#userSettings{
+    margin-top: 1%;
+}
+#settingsDone{
+    float:right;
+    margin-top:2%;
+    width:10%;
+    
+    
+    background-color: #FFFFFF;
+    border-color: dodgerblue;
+    color: dodgerblue;
+}
+
+
+/*Store CSS Start*/
+.buyButton{
+    background-color: #FFFFFF;
+    border-color: limegreen;
+    color: limegreen;
+}
+.tryButton{
+    background-color: #FFFFFF;
+    border-color: blue;
+    color: blue;
+}
