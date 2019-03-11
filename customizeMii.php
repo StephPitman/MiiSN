@@ -1,0 +1,238 @@
+<?php
+
+?>
+<!DOCTYPE>
+<html>
+    <head lang = "en">
+        <title>Create Account</title>
+        <link rel = "stylesheet" href = "styles.css">
+        <script>
+            function updateOptionCSS(section,change){
+                if(section == "skin"){
+                    //LIGHT - FFFF99
+                    //MEDIUM - c4b8a2
+                    //DARK - 7c7465
+                    charHead = document.getElementById("characterHead");
+                    if(change == "light"){
+                        charHead.style.backgroundColor = "#FFFF99";
+                    }
+                    else if(change == "medium"){
+                        charHead.style.backgroundColor = "#C4B8A2";
+                    }
+                    //Dark
+                    else{
+                        charHead.style.backgroundColor = "#7C7465";
+                    }
+                    
+                }
+                else if(section == "head"){
+                    //SQAURE - RADIUS 0
+                    //CIRCLE - RADIUS 1
+                    charHead = document.getElementById("characterHead");
+                    if(change == "square"){
+                        charHead.style.borderRadius = 0;
+                    }
+                    //square
+                    else{
+                        charHead.style.borderRadius = "1em";
+                        
+                    }
+                    
+                }
+                else if(section == "shirt"){
+                    //GREEN - 04b804
+                    //PRUPLE - 990098
+                    //RED - eb1a1a
+                    charBody = document.getElementsByClassName("torso");
+                    if(change == "green"){
+                        for(x=0;x<charBody.length;x++){
+                            charBody[x].style.backgroundColor = "#04b804";
+                        }
+                    }
+                    else if(change == "purple"){
+                        for(x=0;x<charBody.length;x++){
+                            charBody[x].style.backgroundColor = "#990098";
+                        }
+                    }
+                    //red
+                    else{
+                        for(x=0;x<charBody.length;x++){
+                            charBody[x].style.backgroundColor = "#eb1a1a";
+                        }
+                    }
+                    
+                }
+                else if(section == "pants"){
+                    //BLACK - 242424
+                    //YELLOW - d5d50b
+                    //BLUE - 0404b8
+                    charBody = document.getElementsByClassName("leg");
+                    if(change == "black"){
+                        for(x=0;x<charBody.length;x++){
+                            charBody[x].style.backgroundColor = "#242424";
+                        }
+                    }
+                    else if(change == "yellow"){
+                        for(x=0;x<charBody.length;x++){
+                            charBody[x].style.backgroundColor = "#d5d50b";
+                        }
+                    }
+                    //blue
+                    else{
+                        for(x=0;x<charBody.length;x++){
+                            charBody[x].style.backgroundColor = "#0404b8";
+                        }
+                    }
+                    
+                    
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="overallDisplay">
+            <div class="sections" id="editSection">
+                <div id="overallOptions">
+                    <div id="selectorInline">
+                        <div class="optionSelectors">Face/Body</div>
+                        <div class="optionSelectors">Other</div>
+                    </div>
+                    <div id="options">
+                        <p>Skin</p>
+                        <table>
+                            <td>
+                                <button class="optionChoices" id="skinDark" onclick="updateOptionCSS('skin','dark')">
+                                    <img src="miiImages/skinColours/dark.svg" class="displayImg"/>
+                                    <!--<div class="squareOption" id="redBody">
+                                    
+                                    </div>-->
+                                </button>
+                            </td>
+                            <td>
+                                <button class="optionChoices"  id="skinMedium" onclick="updateOptionCSS('skin','medium')">
+                                    <img src="miiImages/skinColours/medium.svg" class="displayImg"/>
+                                    <!--<div class="squareOption" id="greenBody">
+                                    
+                                    </div>-->
+                                
+                                </button>
+                            </td>
+                            <td>
+                                <button class="optionChoices" id="skinLight" onclick="updateOptionCSS('skin','light')">
+                                    <img src="miiImages/skinColours/light.svg" class="displayImg"/>
+                                    <!--<div class="squareOption" id="purpleBody">
+                                    
+                                    </div>-->
+                                
+                                </button>
+                            </td>
+                        </table>
+                        <p>Head</p>
+                        <table>
+                            <tr>
+                                <td>
+                                    <button class="optionChoices" id="headCircle"  onclick="updateOptionCSS('head','circle')">
+                                        <img src="miiImages/heads/circleHead.svg" class="displayImg"/>
+                                        <!--<div class="headOption" id="circleHead">
+
+                                        </div>-->
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="optionChoices" id="headSquare" onclick="updateOptionCSS('head','square')">
+                                        <img src="miiImages/heads/squareHead.svg" class="displayImg"/>
+                                        <!--<div class="headOption" id="squareHead">
+
+                                        </div>-->
+                                    </button>
+                                </td>
+                                <td>
+                                    <!--<button class="optionChoices" id="headTriangle" onclick="updateOptionCSS('head','triangle')">
+                                        <img src="miiImages/heads/triangleHead.svg" class="displayImg" id="headTriangle"/>-->
+                                        <!--<div class="headOption"> 
+
+                                        </div>
+                                    </button>-->
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Body</p>
+                        <table>
+                            <td>
+                                <button class="optionChoices" id="shirtRed" onclick="updateOptionCSS('shirt','red')">
+                                    <img src="miiImages/shirtColours/red.svg" class="displayImg"/>
+                                    <!--<div class="squareOption" id="redBody">
+                                    
+                                    </div>-->
+                                </button>
+                            </td>
+                            <td>
+                                <button class="optionChoices" id="shirtGreen" onclick="updateOptionCSS('shirt','green')">
+                                    <img src="miiImages/shirtColours/green.svg" class="displayImg"/>
+                                    <!--<div class="squareOption" id="greenBody">
+                                    
+                                    </div>-->
+                                
+                                </button>
+                            </td>
+                            <td>
+                                <button class="optionChoices" id="shirtPurple" onclick="updateOptionCSS('shirt','purple')">
+                                    <img src="miiImages/shirtColours/purple.svg" class="displayImg"/>
+                                    <!--<div class="squareOption" id="purpleBody">
+                                    
+                                    </div>-->
+                                
+                                </button>
+                            </td>
+                        </table>
+                        <p>Pants</p>
+                        <table>
+                            <td>
+                                <button class="optionChoices" id="pantBlack" onclick="updateOptionCSS('pants','black')">
+                                    <img src="miiImages/pantColours/black.svg" class="displayImg"/>
+                                    <!--<div class="squareOption" id="redBody">
+                                    
+                                    </div>-->
+                                </button>
+                            </td>
+                            <td>
+                                <button class="optionChoices" id="pantYellow" onclick="updateOptionCSS('pants','yellow')">
+                                    <img src="miiImages/pantColours/yellow.svg" class="displayImg" />
+                                    <!--<div class="squareOption" id="greenBody">
+                                    
+                                    </div>-->
+                                
+                                </button>
+                            </td>
+                            <td>
+                                <button class="optionChoices" id="pantBlue" onclick="updateOptionCSS('pants','blue')">
+                                    <img src="miiImages/pantColours/blue.svg" class="displayImg"/>
+                                    <!--<div class="squareOption" id="purpleBody">
+                                    
+                                    </div>-->
+                                
+                                </button>
+                            </td>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="sections" id="displaySection">
+                <div id="characterDisplay">
+                    <div id="character">
+                        <div id="characterHead"></div>
+                        <div id="leftArm" class="arm torso"></div>
+                        <div id="characterBody" class="torso"></div>
+                        <div id="rightArm" class="arm torso"></div>
+                        <div id="characterLegs">
+                            <div class="leg" id="leftLeg"></div>
+                            <div class="leg" id="rightLeg"></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="userSelection.html"><button id="doneCustomizing">Done</button></a>
+            </div>
+        </div>
+    </body>
+</html>

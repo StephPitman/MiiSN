@@ -247,12 +247,17 @@ header{
 }
 .optionChoices {
     
-    width:27%;
-    height: 20%;
+    width:12em;
+    height: 6em;
     border:solid;
+    border-width: 2px;
     border-color: black;
     display: inline-block;
     margin:1%;
+    background: #FFFFFF;
+}
+.chosenOption{
+    border-width: 5px;
 }
 .leg{
     background-color: blue;
@@ -272,9 +277,42 @@ header{
 .torso{
     display: inline-block;
 }
-#character{
+.squareOption{
+    height: 2em;
+    width: 2em;
+    margin: 0 auto;
     margin-top:15%;
-    margin-left:25%;
+}
+
+.displayImg{
+    width:3em;
+}
+#dark{
+    background-color: #7c7465;
+}
+#medium{
+    background-color: #c4b8a2;
+}
+#light{
+    background-color: #FFFF99;
+}
+#redBody{
+    background-color: 
+}
+#circleHead{
+    height: 2em;
+    width: 2em;
+    border-radius: 1em;
+    background-color: #c4b8a2;
+}
+#squareHead{
+    height:2em;
+    width:2em;
+    background-color: #c4b8a2;
+}
+#character{
+    margin-top:35%;
+    margin-left:40%;
 }
 #rightArm{
     position: relative;
