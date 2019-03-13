@@ -445,6 +445,12 @@ header{
     color: dodgerblue;
 }
 
+/* Error texts*/
+.ErrorText{
+    font-size: 60%; 
+    color: red;
+}
+
 
 /*Store CSS Start*/
 .buyButton{
