@@ -1,3 +1,6 @@
+Must add Email and email Id and Mii and Miiid (Will have defaulted Mii)
+
+
 CREATE TABLE `tbchats` (
 	`ChatID` SMALLINT(6) NOT NULL,
 	`ChatLog` LONGTEXT NULL,
