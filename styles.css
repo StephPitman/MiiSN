@@ -38,7 +38,6 @@ header{
     font-weight: 100;
 }
 #page{
-    height:100%;
     background-color: #FFFFFF;
     margin-left: 7em;
     margin-right:7em;
@@ -118,6 +117,13 @@ header{
 .infoSections td{
     font-size: 1em;
     padding: 0.5em;
+}
+#regDoneButton{
+    background-color: dodgerblue;
+    border-color: dodgerblue;
+    color: white;
+    float:right;
+    height: 2em;
 }
 
 /*User Selection CSS Start*/
