@@ -83,6 +83,63 @@ function checkLogin($db, $User, $Pass){
     return $bChecked;
 }
 
+function checkUser($db, $sUser){
+    //Returns whether or not username exists in the database already
+    //Returns true if the user does not exists
+    //Returns false if the users does exists
+    $bFound = true;
+    
+    if (isset($sUser)){
+        
+        $sSQL = "Select * from tbUserInfo where Username = '$sUser'";
+        
+        $result = runQuery($db, $sSQL);
+             
+        if (mysqli_num_rows($result) === 0){
+            
+            $bFound = true;
+        }
+        else{
+            
+            $bFound = false;
+        }
+        
+    }
+    
+    return $bFound;
+    
+    
+}
+
+
+function checkEmail($db, $sEmail){
+    //Returns whether or not sEmail exists in the database already
+    //Returns true if the email does not exists
+    //Returns false if the email does exists
+    $bFound = true;
+    
+    if (isset($sEmail)){
+        
+        $sSQL = "Select * from tbEmailInfo where Email = '$sEmail'";
+        
+        $result = runQuery($db, $sSQL);
+             
+        if (mysqli_num_rows($result) === 0){
+            
+            $bFound = true;
+        }
+        else{
+            
+            $bFound = false;
+        }
+        
+    }
+    
+    return $bFound;
+    
+    
+}
+
 function getMiiInfo($db){
   //will get set all of the MiiInfo into $_SESSION
     $sArray;
