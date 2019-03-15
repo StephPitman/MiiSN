@@ -41,6 +41,36 @@ function runQuery($db, $query) {
 	// takes a reference to the DB and a query and returns the results of running the query on the database
 }
 
+function createAccount($db, $sEmail, $sUser, $sPass){
+    //This function will add a new member to the database.
+    $iMiiID;
+    $iEmailID;
+    //Check to see if the database is set 
+    if (isset($db)){
+        
+        //Check to make sure that the user's new email and new username is not already taken
+        if (checkEmail($db, $sEmail) == true and checkUser($db, $sUser) == true){
+            
+            $iMiiID = getNewID($db, "Mii");
+            
+            $iEmailID = getNewID($db, "Email");
+            
+            $sSQL = "Insert into tbMii (MiiID, HeadID, ShirtID, PantsID, SkinID) values ('$iMiiID', '0', '0', '0', '0');";
+            
+            runQuery($db, $sSQL);
+            
+            echo "run";
+            
+            /**********************************
+            
+            Have to add email id, then add username and password, with email id and maybe check to see if they were added correctly...maybe
+            
+            ***/
+            
+	}   
+    }
+}
+
 function checkLogin($db, $User, $Pass){
     //This function will return true if the user was found and will return 
     //false if the user was not found
