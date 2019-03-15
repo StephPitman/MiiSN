@@ -83,6 +83,68 @@ function checkLogin($db, $User, $Pass){
     return $bChecked;
 }
 
+function getNewID($db, $sID){
+    //User can find a new ID for either a MiiId or email ID
+    // Parameters: $db is the database connection
+    //           : $sID can either be "Email" or "Mii" 
+    // Returns: A new MiiID or EmailID or blank if the database was not set
+    // or $sID was entered incorrectly
+    
+    $sNewID = "";
+    
+    //Check to see if the database is set 
+    if (isset($db)){
+        
+        //Check to make sure that Id is not empty
+        if(!empty($sID)){
+            
+            //Check to see which ID the user wants
+            //Find a new EmailID
+            if ($sID == "Email"){
+                
+                //Find the largest EmailID
+                $sSQL = "Select * from tbEmailInfo Order by  EmailID DESC LIMIT 1";
+                
+                $result = runQuery($db, $sSQL); 
+                
+                $obj = mysqli_fetch_object($result);
+                
+                //Add 1 to the largest EmailID, creating a new EmailID
+                $sNewID =  $obj->EmailID + 1;
+                
+            }
+            //Find a new MiiID
+            elseif ($sID == "Mii"){
+                
+                //Find the largest MiiID
+                $sSQL = "Select * from tbMii Order by  MiiID DESC LIMIT 1";
+                
+                $result = runQuery($db, $sSQL); 
+                
+                $obj = mysqli_fetch_object($result);
+                
+                //Add 1 to the largest MiiID, creating a new MiiID
+                $sNewID =  $obj->MiiID + 1;
+                                
+            }
+            //On error return nothing
+            else{
+                
+                $sNewID = "";
+
+                
+            }
+            
+        }
+        
+    }
+    
+    //Return the new ID or an empty string.
+    return $sNewID;
+    
+}
+
+
 function checkUser($db, $sUser){
     //Returns whether or not username exists in the database already
     //Returns true if the user does not exists
