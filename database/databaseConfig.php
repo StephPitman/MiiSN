@@ -45,30 +45,44 @@ function createAccount($db, $sEmail, $sUser, $sPass){
     //This function will add a new member to the database.
     $iMiiID;
     $iEmailID;
+	
     //Check to see if the database is set 
     if (isset($db)){
+	    
+        //Make sure the username, password and email are not empty
+        if (!empty($sUser) and !empty($sPass) and !empty($sEmail)){
+		
+            //Check to make sure that the user's new email and new username is not already taken
+            if (checkEmail($db, $sEmail) == true and checkUser($db, $sUser) == true){
+		
+	    	//Get the user a new MiiID
+                $iMiiID = getNewID($db, "Mii");
+		
+	    	//Get the user a new Email
+                $iEmailID = getNewID($db, "Email");
+		
+	    	//Insert the user's new Mii
+                $sSQL = "Insert into tbMii (MiiID, HeadID, ShirtID, PantsID, SkinID) values ('$iMiiID', '0', '0', '0', '0');";
+
+                runQuery($db, $sSQL);
+		
+	    	//Insert the user's email information
+                $sSQL = "Insert into tbEmailInfo (EmailId, Email) values ('$iEmailID', '$sEmail')";
+
+                runQuery($db, $sSQL);
+		
+	    	//Insert the user's information to make a new account
+                $sSQL = "Insert into tbUserInfo (MiiID, EmailID, Password, Username) values ('$iMiiID','$iEmailID','$sPass','$sUser')";
+
+                runQuery($db, $sSQL);
+
+       		}
+	}
         
-        //Check to make sure that the user's new email and new username is not already taken
-        if (checkEmail($db, $sEmail) == true and checkUser($db, $sUser) == true){
-            
-            $iMiiID = getNewID($db, "Mii");
-            
-            $iEmailID = getNewID($db, "Email");
-            
-            $sSQL = "Insert into tbMii (MiiID, HeadID, ShirtID, PantsID, SkinID) values ('$iMiiID', '0', '0', '0', '0');";
-            
-            runQuery($db, $sSQL);
-            
-            echo "run";
-            
-            /**********************************
-            
-            Have to add email id, then add username and password, with email id and maybe check to see if they were added correctly...maybe
-            
-            ***/
-            
-	}   
     }
+    
+    
+    
 }
 
 function checkLogin($db, $User, $Pass){
