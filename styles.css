@@ -231,7 +231,8 @@ header{
     border: solid;
     border-color: black;
     width:30em;
-    height: 5em;
+    height: 6em;
+    overflow-y: scroll;
     background-color: #FFFFFF;
 }
 
@@ -443,12 +444,6 @@ header{
     background-color: #FFFFFF;
     border-color: dodgerblue;
     color: dodgerblue;
-}
-
-/* Error texts*/
-.ErrorText{
-    font-size: 60%; 
-    color: red;
 }
 
 
