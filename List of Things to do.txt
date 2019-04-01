@@ -1,0 +1,11 @@
+On login insert into Session; username, chatid and mii info. (DB)
+Change Mii Design from php file updates database. (DB)
+Create function to get all the chats a member is in. (DB)
+End session when logging out in settings (DB)
+Get all of the chat names a user is in. (DB)
+Get the user's chat id (DB)
+
+Name dislays in chat.
+Mii Creation in chat.
+
+UML Diagram and Presentation
