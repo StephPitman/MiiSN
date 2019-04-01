@@ -4,6 +4,7 @@ Create function to get all the chats a member is in. (DB)
 End session when logging out in settings (DB)
 Get all of the chat names a user is in. (DB)
 Get the user's chat id (DB)
+Sanitize all information being running it (DB)
 
 Name dislays in chat.
 Mii Creation in chat.
