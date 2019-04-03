@@ -9,7 +9,7 @@
     
   
     
-    if (isset(($_POST["password"])) and isset(($_POST["username"]))){
+    if (isset($_POST["password"]) and isset($_POST["username"])){
         
         $user = $_POST["username"];
         
@@ -63,7 +63,7 @@
             ?>
             <a href="#"><button id = "loginButton" type = "submit">Login</button></a>
             <br />
-            <a id = "registerLink" href = "registration.html">Make an account</a>
+            <a id = "registerLink" href = "registration.php">Make an account</a>
         </div>
     </body>
     </form>

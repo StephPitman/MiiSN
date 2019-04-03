@@ -1,16 +1,34 @@
 <!DOCTYPE>
+<?php  
+include "database/databaseConfig.php";
+
+?>
 <html>
     <head lang = "en">
         <title>Create Account</title>
         <link rel = "stylesheet" href = "styles.css">
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script>  
+            
             function showMessage(messageHTML) {
                 $('#prevChat').append(messageHTML);
             }
 
             $(document).ready(function(){
-                var websocket = new WebSocket("ws://localhost:8090/demo/php-socket.php"); 
+                /*
+                THIS SECTION USED THE TECHNIQUES GIVEN FROM THIS LINK/WEBSITE
+                https://phppot.com/php/simple-php-chat-using-websocket/
+                */
+                var websocket = new WebSocket("ws://localhost:8090/socketCode.php"); 
+                websocket.onopen = function(event){
+                    var messageJSON = {
+                        //chat_user: $('#chat-user').val(),
+                        chat_user: "ENTER",
+                        //chat_user: "USER 1",
+                        chat_message: "<?php echo $_SESSION['user']['username'];?> entered"
+                    };
+                    websocket.send(JSON.stringify(messageJSON));
+                }
                 websocket.onmessage = function(event) {
                     var Data = JSON.parse(event.data);
                     showMessage("<div>"+Data.message+"</div>");
@@ -23,20 +41,47 @@
 
                 $('#chatForm').on("submit",function(event){
                     event.preventDefault();
-                    $('#chat-user').attr("type","hidden");		
+                    $('#chat-user').attr("type","hidden");
                     var messageJSON = {
                         //chat_user: $('#chat-user').val(),
-                        chat_user: "USER 1",
+                        chat_user: "<?php echo $_SESSION['user']['username'];?>",
+                        //chat_user: "USER 1",
                         chat_message: $('#textInput').val()
                     };
                     websocket.send(JSON.stringify(messageJSON));
+                    $('#textInput').val('');
+                });
+                $("#triviaBtn").click(function() {
+                    $.get("https://opentdb.com/api.php?amount=1", function(result){
+                        var messageJSON = {
+                            //chat_user: $('#chat-user').val(),
+                            chat_user: "<?php echo $_SESSION['user']['username'];?>",
+                            //chat_user: "USER 1",
+                            chat_message: result.results[0].question.replace(/&quot;/g,'"')+"  "+result.results[0].correct_answer.replace(/&quot;/g,'"')
+                        };
+                        websocket.send(JSON.stringify(messageJSON));
+                    });
+                });
+                $("#chatBackButton").click(function() {
+                    var messageJSON = {
+                        //chat_user: $('#chat-user').val(),
+                        chat_user: "",
+                        //chat_user: "USER 1",
+                        chat_message: "<?php echo $_SESSION['user']['username'];?> left"
+                    };
+                    websocket.send(JSON.stringify(messageJSON));
+                   websocket.close() 
                 });
             });
 	    </script>
+        <script>
+            
+        
+        </script>
     </head>
     <body>
         
-        <a href="userSelection.html"><button id="chatBackButton">Back</button></a>
+        <a href="userSelection.php"><button id="chatBackButton">Back</button></a>
         <div id="miiBox">
             <div id="miis">
                 <div class="miiInChat">
@@ -121,6 +166,7 @@
                     <input type="submit"/>
                     <input name="createdMessage" id="textInput"/>
                 </form>
+                    <button id="triviaBtn">Trivia</button>
                 
             </div>
 

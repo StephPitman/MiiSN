@@ -1,5 +1,10 @@
 <?php
+/*
+THIS SECTION USED THE TECHNIQUES GIVEN FROM THIS LINK/WEBSITE
+https://phppot.com/php/simple-php-chat-using-websocket/
+*/
     class ChatHandler{
+        private $name;
         function sendMessage($message){
             global $clientSockets;
             $messageLen = strlen($message);
@@ -62,14 +67,15 @@
             socket_write($client_socket_resource,$buf,strlen($buf));
         }
         function newConnectionACK($client_ip) {
-            $mess = 'New client '.$client_ip.' joined';
+            $mess = 'YEP: '.$client_ip.' joined';
+            echo "HERE: ".$_SESSION['user']['username'];
             $messArray = array('message'=>$mess,'mess_type'=>'chat-connection-ack');
             $ack = $this->encloseMessage(json_encode($messArray));
             return $ack;
         }
 
         function connectionDisconnectACK($client_ip) {
-            $mess = 'Client '.$client_ip.' disconnected';
+            $mess = $_SESSION['user']['username'].' disconnected';
             $messArray = array('message'=>$mess,'mess_type'=>'chat-connection-ack');
             $ack = $this->encloseMessage(json_encode($messArray));
             return $ack;
@@ -77,7 +83,13 @@
 
         function createChatBoxMessage($chat_user,$chat_box_message) {
             //FIX MESSAGE FORMAT
-            $mess = "<div>".$chat_user . ":" . $chat_box_message . "</div>";
+            if($chat_user == ""){
+                $mess = "<div>".$chat_box_message . "</div>";
+            }
+            else{
+                $mess = "<div>".$chat_user . ":" . $chat_box_message . "</div>";
+            }
+            
             $messArray = array('message'=>$mess,'message_type'=>'chat-box-html');
             $chatMessage = $this->encloseMessage(json_encode($messArray));
             return $chatMessage;

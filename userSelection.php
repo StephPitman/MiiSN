@@ -21,7 +21,7 @@
                         </a>
                     </td>
                     <td  class="menuOption">
-                        <a href="chatWindow.html" class="menuLinks">
+                        <a href="chatWindow.php" class="menuLinks">
                             <div class="channels">
                                 <p>We Love MiiSN Group Chat</p>
                             </div>

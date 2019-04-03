@@ -96,7 +96,7 @@
                 }
                 else{
                     //check if password is 6 chars long
-                    if(strlen($_POST["password"])>6 and strlen($_POST["password"])<16){
+                    if(strlen($_POST["password"])<6 and strlen($_POST["password"])>16){
                         $passBack = "#F5C5C5";
                         array_push($probs,"Please make sure your password is greater then 6 and less than 16 characters");
                     }

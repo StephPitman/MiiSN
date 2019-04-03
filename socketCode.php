@@ -1,4 +1,8 @@
 <?php
+/*
+THIS SECTION USED THE TECHNIQUES GIVEN FROM THIS LINK/WEBSITE
+https://phppot.com/php/simple-php-chat-using-websocket/
+*/
 define('HOST_NAME',"localhost"); 
 define('PORT',"8090");
 $null = NULL;
@@ -22,10 +26,10 @@ while(true){
         $header = socket_read($newSocket,1024);
         $ch->handshake($header,$newSocket, HOST_NAME, PORT);
         
-        socket_getpeername($newSocket,$client_ip);
-        $connACK = $ch->newConnectionACK($client_ip);
+        /*socket_getpeername($newSocket,$client_ip);
+        $connACK = $ch->newConnectionACK(getUsername());
         
-        $ch->sendMessage($connACK);
+        $ch->sendMessage($connACK);*/
         
         $newSocketIndex = array_search($socketRes, $newSocketArr);
         unset($newSocketArr[$newSocketIndex]);
@@ -43,9 +47,9 @@ while(true){
 
         $socketData = @socket_read($resource, 1024,PHP_NORMAL_READ);
         if($socketData === false){
-            socket_getpeername($resource,$client_ip);
+            /*socket_getpeername($resource,$client_ip);
             $connACK = $ch->connectionDisconnectACK($client_ip);
-            $ch->sendMessage($connACK);
+            $ch->sendMessage($connACK);*/
             $newSocketIndex = array_search($resource,$clientSockets);
             unset($clientSockets[$newSocketIndex]);
         }
