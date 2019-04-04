@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    //$db = getDB();
+     include "database/databaseConfig.php";
 ?>
 <!DOCTYPE>
 <html>
