@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td class="menuOption">
-                        <a href="settings.html" class="menuLinks">
+                        <a href="settings.php" class="menuLinks">
                             <div class="channels">
                                 <p>Settings</p>
                             </div>
