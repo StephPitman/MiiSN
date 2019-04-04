@@ -11,7 +11,7 @@ $obj;
 
 function getDB()
 {
-	$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+    $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
     $connected = true;
     // Check connection
     if (mysqli_connect_error($connection)){//->connect_error) {
@@ -375,6 +375,21 @@ function getPantsSession($db, $PantsID){
     }
     return $sPantsArray;
     
+}
+
+function userLogout($db){
+//when the user logs out make sure to close the database connection and end the session
+    
+    closeDB($db);
+    
+    if (isset($_SESSION['user']['username'])){
+        
+        session_destroy();
+            
+    }
+    
+    
+        
 }
 
 function closeDB($db){
