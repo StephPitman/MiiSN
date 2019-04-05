@@ -1,8 +1,6 @@
 
 $(document).ready(function() {
     
-    alert("Hey");
-    
     $("button").click(function() {
        
             var item = this.id;
