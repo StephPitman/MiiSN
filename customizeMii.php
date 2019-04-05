@@ -34,7 +34,7 @@
         
     }
 
-
+    getMiiInfo($dbCon);
 
 
         
