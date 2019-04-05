@@ -23,10 +23,9 @@
             
             getMiiInfo($dbCon);
             
-            header("LOCATION: userSelection.php");
+            header("LOCATION: userSelection.php");            
             
-            
-            
+            closeDB($dbCon);
             
         }
         
