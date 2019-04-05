@@ -11,35 +11,13 @@
         
         if (isset($_POST['btnDelete'])){
             
-            //Add the current Mii to the database
-            echo $_SESSION['user']['username'] ;    
-            echo "<br>";
-            echo "Skin:";
-            echo $_SESSION['user']['Skin'] ;
-            echo "<br>";
-            echo"Pants:";
-            echo $_SESSION['user']['Pants'] ;
-            echo "<br>";
-            echo"Shirts:";
-            echo $_SESSION['user']['Shirt'] ;
-            echo "<br>";
-            echo"Head:";
-            echo $_SESSION['user']['Head'] ;
-            
             updateMiiInfo($dbCon);
             
         }
        
-        
-        
     }
 
     getMiiInfo($dbCon);
-
-
-        
-    //<button id="doneCustomizing">Done</button>
-        
 
 ?>
 <!DOCTYPE >
