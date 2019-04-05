@@ -27,6 +27,8 @@ function getDB()
 }
 
 
+
+
 function runQuery($db, $query) {
     //Runs a query $db is the connection to the database and $query is the query to be ran
     
@@ -40,6 +42,8 @@ function runQuery($db, $query) {
     return $result;
 	// takes a reference to the DB and a query and returns the results of running the query on the database
 }
+
+
 
 function createAccount($db, $sEmail, $sUser, $sPass){
     //This function will add a new member to the database.
@@ -246,20 +250,57 @@ function checkEmail($db, $sEmail){
     
 }
 
-function getMiiInfo($db){
-  //will get set all of the MiiInfo into $_SESSION
-    $sArray;
+function updateMiiInfo($db){
+//This will update all of the Mii's from $_SESSION
+//into the database
+    
+    if (isset($db)){
+        
+        $sMiiID = getMiiID($db);
+        
+        $sSQL = "UPDATE tbMii SET HeadID = '" . $_SESSION['user']['Head'] . "', ShirtID = '" . $_SESSION['user']['Shirt'] . "', PantsID = '" . $_SESSION['user']['Pants'] . "', SkinID = '" . $_SESSION['user']['Skin'] . "' where MiiID = '$sMiiID'";
+        
+        runQuery($db, $sSQL);
+        
+    }
+    
+    
+}
+
+function getMiiID($db){
+    //Returns the MiiID from the username saved
+    //into $_SESSION
+    
+    //Make sure the database is set
     if (isset($db)){
         
         if (!empty($_SESSION['user']['username'])){
-
+            
             $sSQL = "Select MiiID from tbUserInfo where Username = '" . $_SESSION['user']['username'] . "'";
                 
             $result = runQuery($db, $sSQL);
             
             $obj = mysqli_fetch_object($result);
             
-            $sSQL = "Select * from tbMii where MiiID  =' $obj->MiiID'";
+            return $obj->MiiID;
+            
+        }
+        
+    }
+    
+}
+
+function getMiiInfo($db){
+  //will get set all of the MiiInfo into $_SESSION
+    $sArray;
+    $sMiiID;
+    if (isset($db)){
+        
+        if (!empty($_SESSION['user']['username'])){
+
+            $sMiiID = getMiiID($db);
+            
+            $sSQL = "Select * from tbMii where MiiID  =' $sMiiID'";
             
             $result = runQuery($db, $sSQL);
             
