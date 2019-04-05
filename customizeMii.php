@@ -1,9 +1,57 @@
 <?php
+ 
+    include "database/databaseConfig.php";
+
+    $dbCon = getDB();
+    
+    //Check to make sure the user has finished editing their Mii
+    if (($_SERVER['REQUEST_METHOD'] === 'POST')){
+        
+        
+        
+        if (isset($_POST['btnDelete'])){
+            
+            //Add the current Mii to the database
+            echo $_SESSION['user']['username'] ;    
+            echo "<br>";
+            echo "Skin:";
+            echo $_SESSION['user']['Skin'] ;
+            echo "<br>";
+            echo"Pants:";
+            echo $_SESSION['user']['Pants'] ;
+            echo "<br>";
+            echo"Shirts:";
+            echo $_SESSION['user']['Shirt'] ;
+            echo "<br>";
+            echo"Head:";
+            echo $_SESSION['user']['Head'] ;
+            
+            updateMiiInfo($dbCon);
+            
+        }
+       
+        
+        
+    }
+
+
+
+
+        
+    //<button id="doneCustomizing">Done</button>
+        
 
 ?>
-<!DOCTYPE>
-<html>
-    <head lang = "en">
+<!DOCTYPE >
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="jquery-3.3.1.js"></script>
+        
+        <script src="database.js"></script>
         <title>Create Account</title>
         <link rel = "stylesheet" href = "styles.css">
         <script>
@@ -14,14 +62,23 @@
                     //DARK - 7c7465
                     charHead = document.getElementById("characterHead");
                     if(change == "light"){
+                        
                         charHead.style.backgroundColor = "#FFFF99";
+                        
+                        
                     }
                     else if(change == "medium"){
+                        
                         charHead.style.backgroundColor = "#C4B8A2";
+                        
+                        
                     }
                     //Dark
                     else{
+                        
                         charHead.style.backgroundColor = "#7C7465";
+                        
+                        
                     }
                     
                 }
@@ -30,12 +87,14 @@
                     //CIRCLE - RADIUS 1
                     charHead = document.getElementById("characterHead");
                     if(change == "square"){
+                        
                         charHead.style.borderRadius = 0;
+                        
                     }
                     //square
                     else{
-                        charHead.style.borderRadius = "1em";
                         
+                        charHead.style.borderRadius = "1em";
                     }
                     
                 }
@@ -46,19 +105,29 @@
                     charBody = document.getElementsByClassName("torso");
                     if(change == "green"){
                         for(x=0;x<charBody.length;x++){
+                            
                             charBody[x].style.backgroundColor = "#04b804";
+                                                        
                         }
+                        
                     }
                     else if(change == "purple"){
                         for(x=0;x<charBody.length;x++){
+                            
                             charBody[x].style.backgroundColor = "#990098";
+                            
+                            
                         }
+                        
+                        
                     }
                     //red
                     else{
                         for(x=0;x<charBody.length;x++){
                             charBody[x].style.backgroundColor = "#eb1a1a";
                         }
+                        
+                        
                     }
                     
                 }
@@ -70,11 +139,13 @@
                     if(change == "black"){
                         for(x=0;x<charBody.length;x++){
                             charBody[x].style.backgroundColor = "#242424";
-                        }
+                        }x``
                     }
                     else if(change == "yellow"){
                         for(x=0;x<charBody.length;x++){
                             charBody[x].style.backgroundColor = "#d5d50b";
+                            
+                            
                         }
                     }
                     //blue
@@ -86,10 +157,13 @@
                     
                     
                 }
-            }
+            } 
+            
+        
         </script>
     </head>
     <body>
+        
         <div id="overallDisplay">
             <div class="sections" id="editSection">
                 <div id="overallOptions">
@@ -101,8 +175,9 @@
                         <p>Skin</p>
                         <table>
                             <td>
-                                <button class="optionChoices" id="skinDark" onclick="updateOptionCSS('skin','dark')">
-                                    <img src="miiImages/skinColours/dark.svg" class="displayImg"/>
+                                <button class="optionChoices" name = "skinDark" id="skinDark" onclick="updateOptionCSS('skin','dark')">
+                                   <img src="miiImages/skinColours/dark.svg" class="displayImg"/>
+                                    
                                     <!--<div class="squareOption" id="redBody">
                                     
                                     </div>-->
@@ -118,7 +193,7 @@
                                 </button>
                             </td>
                             <td>
-                                <button class="optionChoices" id="skinLight" onclick="updateOptionCSS('skin','light')">
+                                <button class="optionChoices" id="skinLight" onclick="updateOptionCSS('skin','light') ">
                                     <img src="miiImages/skinColours/light.svg" class="displayImg"/>
                                     <!--<div class="squareOption" id="purpleBody">
                                     
@@ -134,7 +209,7 @@
                                     <button class="optionChoices" id="headCircle"  onclick="updateOptionCSS('head','circle')">
                                         <img src="miiImages/heads/circleHead.svg" class="displayImg"/>
                                         <!--<div class="headOption" id="circleHead">
-
+                                        $_SESSION['user']['Head'] = 
                                         </div>-->
                                     </button>
                                 </td>
@@ -231,8 +306,16 @@
                         </div>
                     </div>
                 </div>
-                <a href="userSelection.html"><button id="doneCustomizing">Done</button></a>
+                <!--<a href="userSelection.php"><button id="doneCustomizing">Done</button></a>
+                
+                <button id="doneCustomizing">Done</button>-->
+                <form method = "post">
+                   <!--  <a href="userSelection.php"><button id="doneCustomizing">Done</button></a> -->
+                   <input type="submit" id = "doneCustomizing" name="btnDelete" value="Done" />
+                </form>
             </div>
+            
         </div>
+    
     </body>
 </html>
