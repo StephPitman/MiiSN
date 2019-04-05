@@ -158,7 +158,23 @@
                     
                 }
             } 
+         
+            $(document).ready(function() {
+                
+                updateOptionCSS("skin", "<?php 
+                                echo ($_SESSION['user']['SkinSVG']); ?>");
+                
+                updateOptionCSS("shirt", "<?php 
+                                echo ($_SESSION['user']['ShirtSVG']); ?>");
+                                
+                updateOptionCSS("head", "<?php 
+                                echo ($_SESSION['user']['HeadSVG']); ?>");
+                
+                updateOptionCSS("pants", "<?php 
+                                echo ($_SESSION['user']['PantsSVG']); ?>");
             
+                
+            });
         
         </script>
     </head>
