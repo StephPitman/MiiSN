@@ -1,9 +1,9 @@
 On login insert into Session; username, chatid and mii info. (DB) ✓ can not insert chat id. Will have function that will return an array of chatid a member is in.
-Change Mii Design from php file updates database. (DB)
-Create function to get all the chats a member is in. (DB)
+Change Mii Design from php file updates database. (DB) ✓
+Create function to get all the chats a member is in. (DB)✓
 End session and close database connection when logging out in settings (DB) ✓
-Get all of the chat names a user is in. (DB)
-Get the user's chat id (DB)
+Get all of the chat names a user is in. (DB)✓
+Get the user's chat id (DB)✓
 
 Name dislays in chat. CHECK
 Mii Creation in chat. 
