@@ -14,7 +14,6 @@ $(document).ready(function() {
             url: 'dataabaseInput.php',
             data: data,
             success: function(result) {
-            alert(JSON.stringify(result));
             },
             error: function(result) {
                 alert('error');
