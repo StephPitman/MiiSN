@@ -78,9 +78,9 @@ CREATE TABLE IF NOT EXISTS `tbhead` (
 -- Dumping data for table miisindb.tbhead: ~3 rows (approximately)
 /*!40000 ALTER TABLE `tbhead` DISABLE KEYS */;
 INSERT INTO `tbhead` (`HeadID`, `HeadSVG`) VALUES
-	(0, 'circleHead'),
-	(1, 'squareHead'),
-	(2, 'triangleHead');
+	(0, 'circle'),
+	(1, 'square'),
+	(2, 'triangle');
 /*!40000 ALTER TABLE `tbhead` ENABLE KEYS */;
 
 -- Dumping structure for table miisindb.tbmemberchatids
