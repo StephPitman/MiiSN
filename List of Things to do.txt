@@ -8,8 +8,8 @@ Registration page✓
 
 Update chat message to database.
 Pass chat log.
-Create a chat.
-Password for chat (time depending).
+Create a chat.✓
+Password for chat (time depending). Database section is complete
 
 Name dislays in chat. CHECK
 Mii Creation in chat. 
