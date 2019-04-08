@@ -129,7 +129,7 @@
         <!--The Header box for registering page -OC-->
         <header>
             <h2 id = "headerLogo" class="headerInline">MiiSN</h2>
-            <a class = "links headerInline" href = "index.html">Home</a>
+            <a class = "links headerInline" href = "index.php">Home</a>
         </header>
         
         <div id="page">
