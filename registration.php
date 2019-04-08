@@ -224,9 +224,18 @@
                             }
                         }
                         else{
-                           
                             
-                            createAccount($dbCon, $_POST["email"], $_POST["username"], $_POST["password"], $_POST["fName"], $_POST["lName"]);
+                            $options = [
+                                'salt' => random_bytes(22), 
+                                'cost' => 12
+                            ];
+                            
+                            $sPassword = $_POST["password"];
+                            
+                            $sPassword = password_hash($sPassword, PASSWORD_DEFAULT, $options);
+                             
+                            createAccount($dbCon, $_POST["email"], $_POST["username"], $sPassword, $options[
+                                'salt'], $_POST["fName"], $_POST["lName"]);
                             
                             $_SESSION['user']['username'] = $_POST["username"];
             
@@ -236,7 +245,7 @@
 
                             closeDB($dbCon);
                             
-                        } 
+                        }
                     }
                    
                 ?>
