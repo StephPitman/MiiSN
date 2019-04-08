@@ -89,6 +89,42 @@ function createAccount($db, $sEmail, $sUser, $sPass){
     
 }
 
+function createChat($db, $User, $Pass = ""){
+    //This function will create a chat that will allow for
+    //a user to create a chat.
+    
+    //Make sure the database is set
+    if (isset($db)){
+        
+        //Get the next chatid
+        $ChatID = getNewID($db, "Chat");
+        
+        //Check to see if there a new ID has been passed
+        if (isset($ChatID)){
+            
+            //check to see if a password has been passed
+            if ($Pass == ''){
+                
+                $sSQL = "Insert INTO tbChats (ChatID, Admin, Password) VALUES ($ChatID, $User, $Pass)";
+            
+            }
+            else{
+                
+                $sSQL = "Insert INTO tbChats (ChatID, Admin) VALUES ($ChatID, $User)";
+                
+            }
+            
+            //Insert the chat into the database.
+            runQuery($db,$sSQL);
+            
+        }
+        
+    }
+    
+    
+}
+
+
 function checkLogin($db, $User, $Pass){
     //This function will return true if the user was found and will return 
     //false if the user was not found
