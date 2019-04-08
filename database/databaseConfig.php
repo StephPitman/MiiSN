@@ -192,6 +192,33 @@ function getNewID($db, $sID){
     
 }
 
+function getChatIDs($db){
+    //Will return an array with all the Chats a user is in
+    //Paramters: $db - a database connection
+    
+    //Make sure the database is set
+    if (isset($db)){
+        
+        //Make sure the member is logged in
+        if (!empty($_SESSION['user']['username'])){
+            
+            //Select all of the chats a user is in
+            $sSQL = "Select ChatID from tbMemberChatIds where Username = '" . $_SESSION['user']['username'] . "'";
+            
+            //Run query
+            $result = runQuery($db, $sSQL);
+            
+            //Return an array of all of the rows
+            $obj = mysqli_fetch_all($result);
+            
+            return $obj;
+            
+        }
+        
+        
+    }
+    
+}
 
 function checkUser($db, $sUser){
     //Returns whether or not username exists in the database already
