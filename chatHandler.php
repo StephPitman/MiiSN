@@ -4,7 +4,8 @@ THIS SECTION USED THE TECHNIQUES GIVEN FROM THIS LINK/WEBSITE
 https://phppot.com/php/simple-php-chat-using-websocket/
 */
     class ChatHandler{
-        private $name;
+        private $names = array();
+        private $miiInfo = array();
         function sendMessage($message){
             global $clientSockets;
             $messageLen = strlen($message);
@@ -66,33 +67,89 @@ https://phppot.com/php/simple-php-chat-using-websocket/
             "Sec-WebSocket-Accept:$secureAccept\r\n\r\n";
             socket_write($client_socket_resource,$buf,strlen($buf));
         }
-        function newConnectionACK($client_ip) {
-            $mess = 'YEP: '.$client_ip.' joined';
-            echo "HERE: ".$_SESSION['user']['username'];
-            $messArray = array('message'=>$mess,'mess_type'=>'chat-connection-ack');
-            $ack = $this->encloseMessage(json_encode($messArray));
-            return $ack;
-        }
-
-        function connectionDisconnectACK($client_ip) {
-            $mess = $_SESSION['user']['username'].' disconnected';
-            $messArray = array('message'=>$mess,'mess_type'=>'chat-connection-ack');
-            $ack = $this->encloseMessage(json_encode($messArray));
-            return $ack;
-        }
-
-        function createChatBoxMessage($chat_user,$chat_box_message) {
-            //FIX MESSAGE FORMAT
-            if($chat_user == ""){
-                $mess = "<div>".$chat_box_message . "</div>";
+        
+        function arrayMessage($array){
+            $l = "[";
+            $x = 0;
+            while($x < count($array)){
+                $l = $l.$array[$x];
+                $x++;
+                if($x != count($array)){
+                    $l = $l.",";
+                }
             }
-            else{
+            $l = $l."]";
+            
+            $messArray = array('message'=>$l,'mess_type'=>'user_array');
+            $json = json_encode($messArray);
+            return $json;
+        }
+
+        function createChatBoxMessage($chat_user,$chat_box_message,$code,$users,$miis) {
+            //FIX MESSAGE FORMAT
+            $messArray = null;
+            if($code == 1){
+                $mess = "<div>".$chat_box_message . "</div>";
+                $messArray = array('message'=>$mess,'users'=>$users,'miiInfo'=>$miis,'message_type'=>'enter');
+            }
+            elseif($code == 0){
                 $mess = "<div>".$chat_user . ":" . $chat_box_message . "</div>";
+                $messArray = array('message'=>$mess,'users'=>$users,'message_type'=>'chat');
+            }
+            elseif($code == 2){
+                $mess = "<div>".$chat_box_message . "</div>";
+                $messArray = array('message'=>$mess,'users'=>$users,'message_type'=>'exit');
             }
             
-            $messArray = array('message'=>$mess,'message_type'=>'chat-box-html');
+            
             $chatMessage = $this->encloseMessage(json_encode($messArray));
             return $chatMessage;
+        }
+        
+        function updateUsers($newUser,$action){
+            //echo "HERE IS NEW USER: ";
+            //print_r($newUser);
+            if($action == "add"){
+                array_push($this->names,$newUser);
+            }
+            elseif($action == "remove"){
+                $index = array_search($newUser,$this->names);
+                array_splice($this->names,$index,1);
+            }
+        }
+        
+        function getUsernames(){
+            $arr = array();
+            for($x=0;$x<count($this->names);$x++){
+                array_push($arr,$this->names[$x]);
+            }
+            return $arr;
+        }
+        
+        function getMiiInfo(){
+            $arr = array();
+            for($x=0;$x<count($this->miiInfo);$x++){
+                array_push($arr,$this->miiInfo[$x]);
+            }
+            return $arr;
+        }
+        
+        function getIndex($user){
+            return array_search($user,$this->names);
+        }
+        
+        function updateMiiInfo($newInfo,$user,$action){
+            if($action == "add"){
+                array_push($this->miiInfo,$newInfo);
+            }
+            elseif($action == "remove"){
+                $index = array_search($user,$this->names);
+                array_splice($this->miiInfo,$index,1);
+            }
+        }
+        
+        function getMiiInfoIndex($index){
+            return $this->miiInfo[$index];
         }
     }
 ?>
