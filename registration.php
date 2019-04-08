@@ -224,10 +224,18 @@
                             }
                         }
                         else{
-                            //insert new user into DB
-                            //start session w/
-                                //userID
-                                //miiId
+                           
+                            
+                            createAccount($dbCon, $_POST["email"], $_POST["username"], $_POST["password"], $_POST["fName"], $_POST["lName"]);
+                            
+                            $_SESSION['user']['username'] = $_POST["username"];
+            
+                            getMiiInfo($dbCon);
+
+                            header("LOCATION: userSelection.php");            
+
+                            closeDB($dbCon);
+                            
                         } 
                     }
                    
