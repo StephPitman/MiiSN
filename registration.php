@@ -86,10 +86,21 @@
                         $emailText = $_POST["email"];
                     }
                 }
+                
+                //check if the username already exists in the database.
+                $bUser = checkUser($dbCon, $_POST["username"]);
+               
                 //check username is inputted
                 if(!isset($_POST["username"]) or $_POST["username"] == NULL){
                     $usernameBack = "#F5C5C5";
                     array_push($probs, "Please enter a username");
+                }
+                //Check to make sure the username does not already exist in the database.
+                 elseif($bUser == false){
+                    
+                    $usernameBack = "#F5C5C5";
+                    array_push($probs, "This username is already in use.");
+                    
                 }
                 else{
                     // ___________________________________________________________________________________________CHECKING IF USERNAME IS USED HERE
