@@ -119,7 +119,11 @@ function checkLogin($db, $User, $Pass){
             }
             else{
                 
-                $bChecked = true;
+                if (password_verify($Pass, $obj->Password)){
+                    
+                    $bChecked = true;    
+                    
+                }
                 
             }
             
