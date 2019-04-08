@@ -13,6 +13,7 @@
             
             updateMiiInfo($dbCon);
             
+            header ("Location: userSelection.php");
         }
        
     }
