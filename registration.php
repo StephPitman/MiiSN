@@ -1,5 +1,7 @@
 <!DOCTYPE html class = "registrationPage">
 <?php
+    include "database/databaseConfig.php";
+    $dbCon = getDB();
     $fNameBack = "#FFFFFF";
     $fNameText = "";
     $lNameBack = "#FFFFFF";
@@ -66,9 +68,17 @@
                 }
                 else{
                     //check if email is valid
+                    $bEmail = checkEmail($dbCon, $_POST["email"]);
+                    
+                    //check if email is valid
                    if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
                         $emailBack = "#F5C5C5";
                         array_push($probs,"Please enter a vaid email");
+                    }
+                    //check to see if the email is already in use
+                    elseif ($bEmail == false){
+                        $emailBack = "#F5C5C5";
+                        array_push($probs,"This email is already in use.");
                     }
                     //if email passes tests display it is correct
                     else{
