@@ -176,6 +176,8 @@ CREATE TABLE IF NOT EXISTS `tbuserinfo` (
   `Password` varchar(16) NOT NULL COMMENT 'This is the user''s password',
   `EmailID` smallint(6) NOT NULL,
   `MiiID` int(11) NOT NULL,
+  `Firstname` varchar(50) NOT NULL,
+  `Lastname` varchar(50) NOT NULL,	
   PRIMARY KEY (`Username`),
   KEY `FK_tbuserinfo_tbmii` (`MiiID`),
   KEY `FK_tbuserinfo_tbemailinfo` (`EmailID`),
