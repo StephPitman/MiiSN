@@ -61,6 +61,26 @@ function getChat($db, $ChatID){
     
 }
 
+function updateChat($db, $sChat, $sChatID){
+    //will update the chat log with the most recent chat.
+    
+    //Make sure the database is set
+    if(isset($db)){
+        
+        //make sure there is a chat
+        if(isset($sChat)){
+            
+            //Update the chat log
+            $sSQL = "Update tbChats Set ChatLog = '$sChat' where ChatID = '$sChatID'";
+            
+            runQuery($db, $sSQL);
+            
+        }
+        
+    }
+    
+}
+
 function createAccount($db, $sEmail, $sUser, $sPass){
     //This function will add a new member to the database.
     $iMiiID;
