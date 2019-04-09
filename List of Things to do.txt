@@ -7,7 +7,7 @@ Get the user's chat id (DB)✓
 Registration page✓
 
 Update chat message to database.
-Pass chat log.
+Pass chat log.✓
 Create a chat.✓
 Password for chat (time depending). Database section is complete
 
