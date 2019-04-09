@@ -1,0 +1,10 @@
+•	What technologies have you used?
+The technologies we used on the project are the following: HTML/CSS, JavaScript, jQuery , PHP, Ajax, MySQL.
+•	Justify the usage of every technology/framework/API, specially if you are using technology/framework/API not covered in the course.
+The technologies we used in our project were all covered in the course except for the API. We used HTML and CSS for the framework. We used JavaScript, jQuery and Ajax for the front end. These technologies were used to implement the customization of the user’s Mii. JavaScript was used to change the Mii in customizeMii.php. When a user clicks a button, it will automatically update the CSS to match their Mii. Ajax is used to pass the updated Mii’s information to PHP, then PHP will update the database so the customizations will be saved. jQuery is used to automatically update the user’s Mii to match their saved Mii when in customizeMii.php. PHP was used as the backend to update the database and on errors produce from user selection. MySQL was the framework used to store our database.
+•	Name and give the URL of one public application that resembles your project, if there is any? List the similarities and differences?
+https://www.messenger.com/ is the messenger platform that is based from Facebook where people can message each other. It is similar to Facebook because you can message people online, the difference is that you can customize your Mii that can chat with other people. Mii’s will also chat with a bubble above their head and there is a chat log that records all of the chat.
+•	Name a web application that inspired you and discuss the similarities and differences with your project
+Our projects were based on combining all things that for the 90 kids. The things we remembered most from our childhood was MSN and Mii, this project combines both. MiiSN is the love child of these amazing applications. We took the framework of Wii and the messenger aspect of MSN and combined them.
+•	Which part of the project was the most time-consuming or all?
+The most time consuming part of the project was getting the PHP sockets to function.
