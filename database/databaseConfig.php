@@ -43,7 +43,23 @@ function runQuery($db, $query) {
 	// takes a reference to the DB and a query and returns the results of running the query on the database
 }
 
-
+function getChat($db, $ChatID){
+    //Will return all of the lag log that has been saved.
+	
+    //Make sure the database is set
+    if(isset($db)){
+        
+        $sSQL = "Select Chatlog from tbChats where chatID = '$ChatID'";
+        
+        $result = runQuery($db, $sSQL);
+        
+        $obj = mysqli_fetch_object($result);
+        
+        return ($obj->Chatlog);
+        
+    }
+    
+}
 
 function createAccount($db, $sEmail, $sUser, $sPass){
     //This function will add a new member to the database.
