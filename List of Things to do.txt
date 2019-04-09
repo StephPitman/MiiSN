@@ -6,7 +6,7 @@ Get all of the chat names a user is in. (DB)✓
 Get the user's chat id (DB)✓
 Registration page✓
 
-Update chat message to database.
+Update chat message to database.✓
 Pass chat log.✓
 Create a chat.✓
 Password for chat (time depending). Database section is complete
