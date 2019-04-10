@@ -125,7 +125,28 @@ function createAccount($db, $sEmail, $sUser, $sPass){
     
 }
 
-function createChat($db, $User, $Pass = ""){
+function addUsertoChat($db, $User, $ChatID){
+    //This function will add a user to a chat by adding their username and the chatID to tbMemberChatIDs
+    
+    //Make sure the database, user name and Chat Id are all set
+    if (isset($db) and isset($User) and isset($ChatID)){
+        
+        
+        $sSQL = "Insert INTO tbmemberchatids (ChatID, Username) VALUES ($ChatID, '$User')";
+        
+        echo $sSQL;
+        
+        //Insert the chat into the database.
+        runQuery($db,$sSQL);
+        
+        echo "Done";
+        
+    }
+    
+    
+}
+
+function createChat($db, $ChatName, $User, $Pass = ""){
     //This function will create a chat that will allow for
     //a user to create a chat.
     
@@ -139,19 +160,22 @@ function createChat($db, $User, $Pass = ""){
         if (isset($ChatID)){
             
             //check to see if a password has been passed
-            if ($Pass == ''){
+            if ($Pass === ""){
+                                
+                $sSQL = "Insert INTO tbChats (ChatID, Admin, Name) VALUES ($ChatID, '$User', '$ChatName');";
                 
-                $sSQL = "Insert INTO tbChats (ChatID, Admin, Password) VALUES ($ChatID, $User, $Pass)";
-            
             }
             else{
                 
-                $sSQL = "Insert INTO tbChats (ChatID, Admin) VALUES ($ChatID, $User)";
+                $sSQL = "Insert INTO tbChats (ChatID, Admin, Password, Name) VALUES ($ChatID, '$User', '$Pass', '$ChatName')";
+            
                 
             }
             
             //Insert the chat into the database.
             runQuery($db,$sSQL);
+            
+            addUsertoChat($db, $User, $ChatID);
             
         }
         
