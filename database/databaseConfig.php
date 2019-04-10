@@ -4,6 +4,7 @@ define('DBHOST', 'localhost');
 define('DBUSER', 'root');
 define('DBPASS', '');
 define('DBNAME', 'MiiSiNdb');
+define('SALT', '-45dfeHK/__yu349@-/klF21-1_\/4JkUP/4');
 
 $result;
 $sSQL;
@@ -27,128 +28,36 @@ function getDB()
 }
 
 
-
-
-function runQuery($db, $query) {
-    //Runs a query $db is the connection to the database and $query is the query to be ran
-    
-    //Checks the 
-    if(isset($db) and isset($query)){
-        
-        $result =  mysqli_query($db, $query);
-        
-    }
-    
-    return $result;
-	// takes a reference to the DB and a query and returns the results of running the query on the database
-}
-
-function getChat($db, $ChatID){
-    //Will return all of the lag log that has been saved.
-	
-    //Make sure the database is set
-    if(isset($db)){
-        
-        $sSQL = "Select Chatlog from tbChats where chatID = '$ChatID'";
-        
-        $result = runQuery($db, $sSQL);
-        
-        $obj = mysqli_fetch_object($result);
-        
-        return ($obj->Chatlog);
-        
-    }
-    
-}
-
-function updateChat($db, $sChat, $sChatID){
-    //will update the chat log with the most recent chat.
-    
-    //Make sure the database is set
-    if(isset($db)){
-        
-        //make sure there is a chat
-        if(isset($sChat)){
-            
-            //Update the chat log
-            $sSQL = "Update tbChats Set ChatLog = '$sChat' where ChatID = '$sChatID'";
-            
-            runQuery($db, $sSQL);
-            
-        }
-        
-    }
-    
-}
-
-function createAccount($db, $sEmail, $sUser, $sPass){
-    //This function will add a new member to the database.
-    $iMiiID;
-    $iEmailID;
-	
-    //Check to see if the database is set 
-    if (isset($db)){
-	    
-        //Make sure the username, password and email are not empty
-        if (!empty($sUser) and !empty($sPass) and !empty($sEmail)){
-		
-            //Check to make sure that the user's new email and new username is not already taken
-            if (checkEmail($db, $sEmail) == true and checkUser($db, $sUser) == true){
-		
-	    	//Get the user a new MiiID
-                $iMiiID = getNewID($db, "Mii");
-		
-	    	//Get the user a new Email
-                $iEmailID = getNewID($db, "Email");
-		
-	    	//Insert the user's new Mii
-                $sSQL = "Insert into tbMii (MiiID, HeadID, ShirtID, PantsID, SkinID) values ('$iMiiID', '0', '0', '0', '0');";
-
-                runQuery($db, $sSQL);
-		
-	    	//Insert the user's email information
-                $sSQL = "Insert into tbEmailInfo (EmailId, Email) values ('$iEmailID', '$sEmail')";
-
-                runQuery($db, $sSQL);
-		
-	    	//Insert the user's information to make a new account
-                $sSQL = "Insert into tbUserInfo (MiiID, EmailID, Password, Username) values ('$iMiiID','$iEmailID','$sPass','$sUser')";
-
-                runQuery($db, $sSQL);
-
-       		}
-	}
-        
-    }
-    
-    
-    
-}
-
 function addUsertoChat($db, $User, $ChatID){
     //This function will add a user to a chat by adding their username and the chatID to tbMemberChatIDs
+    
+    $User = mysql_real_escape_string($User);
+    
+    $ChatID = mysql_real_escape_string($ChatID);
     
     //Make sure the database, user name and Chat Id are all set
     if (isset($db) and isset($User) and isset($ChatID)){
         
         
         $sSQL = "Insert INTO tbmemberchatids (ChatID, Username) VALUES ($ChatID, '$User')";
-        
-        echo $sSQL;
-        
         //Insert the chat into the database.
         runQuery($db,$sSQL);
-        
-        echo "Done";
         
     }
     
     
 }
 
+
 function createChat($db, $ChatName, $User, $Pass = ""){
     //This function will create a chat that will allow for
     //a user to create a chat.
+    
+    $ChatName = mysql_real_escape_string($ChatName);
+    
+    $User = mysql_real_escape_string($User);
+    
+    $Pass = mysql_real_escape_string($Pass);
     
     //Make sure the database is set
     if (isset($db)){
@@ -185,12 +94,135 @@ function createChat($db, $ChatName, $User, $Pass = ""){
 }
 
 
+function updateChat($db, $sChat, $sChatID){
+    //will update the chat log with the most recent chat.    
+    
+    $sChatID = mysql_real_escape_string($sChatID);
+    
+    $sChat = mysql_real_escape_string($sChat);
+    
+    //Make sure the database is set
+    if(isset($db)){
+        
+        //make sure there is a chat
+        if(isset($sChat)){
+            
+            //Update the chat log
+            $sSQL = "Update tbChats Set ChatLog = '$sChat' where ChatID = '$sChatID'";
+            
+            runQuery($db, $sSQL);
+            
+            
+        }
+        
+        
+    }
+    
+    
+}
+
+function getChat($db, $ChatID){
+    //Returns the chat log based on the chat id
+    
+    $sChatID = mysql_real_escape_string($sChatID);
+    
+    
+    //Make sure the database is set
+    if(isset($db)){
+        
+        $sSQL = "Select Chatlog from tbChats where chatID = '$ChatID'";
+        
+        $result = runQuery($db, $sSQL);
+        
+        $obj = mysqli_fetch_object($result);
+        
+        return ($obj->Chatlog);
+        
+    }
+    
+}
+
+function runQuery($db, $query) {
+    //Runs a query $db is the connection to the database and $query is the query to be ran
+    
+    //Checks the 
+    if(isset($db) and isset($query)){
+        
+        $result =  mysqli_query($db, $query);
+        
+    }
+    
+    return $result;
+	// takes a reference to the DB and a query and returns the results of running the query on the database
+}
+
+
+
+function createAccount($db, $sEmail, $sUser, $sPass, $salt, $First, $Last){
+    //This function will add a new member to the database.
+    $iMiiID;
+    $iEmailID;
+	
+    $sEmail = mysql_real_escape_string($sEmail);
+    
+    $sUser = mysql_real_escape_string($sUser);
+    
+    $sPass = mysql_real_escape_string($sPass);
+    
+    $First = mysql_real_escape_string($First);
+    
+    $Last = mysql_real_escape_string($Last);
+    
+    //Check to see if the database is set 
+    if (isset($db)){
+        
+        mysql_real_escape_string()
+	    
+        //Make sure the username, password and email are not empty
+        if (!empty($sUser) and !empty($sPass) and !empty($salt) and !empty($sEmail) and !empty($First) and !empty($Last)){
+		
+            //Check to make sure that the user's new email and new username is not already taken
+            if (checkEmail($db, $sEmail) == true and checkUser($db, $sUser) == true){
+		
+	    	//Get the user a new MiiID
+                $iMiiID = getNewID($db, "Mii");
+		
+	    	//Get the user a new Email
+                $iEmailID = getNewID($db, "Email");
+		
+	    	//Insert the user's new Mii
+                $sSQL = "Insert into tbMii (MiiID, HeadID, ShirtID, PantsID, SkinID) values ('$iMiiID', '0', '0', '0', '0');";
+
+                runQuery($db, $sSQL);
+		
+	    	//Insert the user's email information
+                $sSQL = "Insert into tbEmailInfo (EmailId, Email) values ('$iEmailID', '$sEmail')";
+
+                runQuery($db, $sSQL);
+		
+	    	//Insert the user's information to make a new account
+                $sSQL = "Insert into tbUserInfo (MiiID, EmailID, Password, Salt, Username, Firstname, Lastname) values ('$iMiiID','$iEmailID','$sPass', '$salt' ,'$sUser', '$First','$Last')";
+
+                runQuery($db, $sSQL);
+
+       		}
+	   }
+        
+    }
+    
+    
+    
+}
+
 function checkLogin($db, $User, $Pass){
     //This function will return true if the user was found and will return 
     //false if the user was not found
     //$User is the username being passed
     //$Pass is the password being passed
     //$db is the database connection
+    
+    $sChatID = mysql_real_escape_string($User);
+    
     
     $bChecked = false;
     
@@ -200,12 +232,14 @@ function checkLogin($db, $User, $Pass){
         //make sure the username and password is not empty
         if(!empty($User) and !empty($Pass)){
             
-            $sSQL = "Select * from tbUserInfo where Password = '$Pass' and Username = '$User'";
+            $sSQL = "Select * from tbUserInfo where Username = '$User'";
             
             $result = runQuery($db, $sSQL);
             
             $obj = mysqli_fetch_object($result);
             
+         //   $sPassword = hash( hash($Pass,SALT) + $salt,SALT);
+                
             //Check to see if the object is empty
             //If it is empty then the user was not found in the database 
             if (empty($obj)){
@@ -275,6 +309,19 @@ function getNewID($db, $sID){
                 $sNewID =  $obj->MiiID + 1;
                                 
             }
+            elseif ($sID == "Chat"){
+                
+                $sSQL = "Select ChatID from tbChats order by ChatID DESC LIMIT 1";
+                
+                $result = runQuery($db, $sSQL); 
+                
+                $obj = mysqli_fetch_object($result);
+                
+                //Add 1 to the largest ChatID, creating a new MiiID
+                $sNewID =  $obj->ChatID + 1;
+                
+                
+            }
             //On error return nothing
             else{
                 
@@ -292,39 +339,14 @@ function getNewID($db, $sID){
     
 }
 
-function getChatIDs($db){
-    //Will return an array with all the Chats a user is in
-    //Paramters: $db - a database connection
-    
-    //Make sure the database is set
-    if (isset($db)){
-        
-        //Make sure the member is logged in
-        if (!empty($_SESSION['user']['username'])){
-            
-            //Select all of the chats a user is in
-            $sSQL = "Select ChatID from tbMemberChatIds where Username = '" . $_SESSION['user']['username'] . "'";
-            
-            //Run query
-            $result = runQuery($db, $sSQL);
-            
-            //Return an array of all of the rows
-            $obj = mysqli_fetch_all($result);
-            
-            return $obj;
-            
-        }
-        
-        
-    }
-    
-}
 
 function checkUser($db, $sUser){
     //Returns whether or not username exists in the database already
     //Returns true if the user does not exists
     //Returns false if the users does exists
     $bFound = true;
+    
+    $sChatID = mysql_real_escape_string($User);
     
     if (isset($sUser)){
         
@@ -354,6 +376,9 @@ function checkEmail($db, $sEmail){
     //Returns true if the email does not exists
     //Returns false if the email does exists
     $bFound = true;
+    
+    
+    $sEmail = mysql_real_escape_string($sEmail);
     
     if (isset($sEmail)){
         
@@ -391,6 +416,73 @@ function updateMiiInfo($db){
         
     }
     
+    
+}
+
+function getChatName($db, $ChatID){
+    //Will return the chat name give the chat id and a database connection
+    
+    $ChatID = mysql_real_escape_string($ChatID);
+        
+    //Make sure the database is set
+    if (isset($db)){
+        
+        //Make sure there is a Chat ID
+        if (isset($ChatID)){
+            
+            //Select all of the chatname
+            $sSQL = "Select Name from tbChats where ChatID = $ChatID";
+        
+            //Run query
+            $result = runQuery($db, $sSQL);
+            
+            //Return an array of all of the rows
+            $obj = mysqli_fetch_all($result);
+            
+            return $obj[0][0];
+            
+            
+        }
+        
+    }
+    
+    
+}
+
+function getChatIDs($db){
+    //Will return an array with all the Chats a user is in
+    //Paramters: $db - a database connection
+    
+    //Make sure the database is set
+    if (isset($db)){
+        
+        //Make sure the member is logged in
+        if (!empty($_SESSION['user']['username'])){
+            
+            //Select all of the chats a user is in
+            $sSQL = "Select ChatID from tbMemberChatIds where Username = '" . $_SESSION['user']['username'] . "'";
+        
+            //Run query
+            $result = runQuery($db, $sSQL);
+            
+            //Return an array of all of the rows
+            $obj = mysqli_fetch_all($result);
+            
+            return $obj;
+            
+            / //   $obj =(getChatIDs($dbCon));
+            
+            //Will return array $obj[][]
+           // foreach ($obj as $x){
+            
+             //    getChatName($dbCon, $x[0]);
+                
+            //}
+            
+        }
+        
+        
+    }
     
 }
 
@@ -541,7 +633,6 @@ function getPantsSession($db, $PantsID){
         $_SESSION['user']['PantsSVG'] = $obj->PantsSVG;
         
     }
-    return $sPantsArray;
     
 }
 
@@ -554,7 +645,7 @@ function userLogout($db){
         
         session_destroy();
             
-    }
+    }   
     
     
         
