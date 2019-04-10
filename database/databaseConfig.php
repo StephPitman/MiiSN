@@ -593,7 +593,6 @@ function getHeadSession($db, $HeadID){
         $_SESSION['user']['HeadSVG'] = $obj->HeadSVG;
         
     }
-    return $sPantsArray;
     
 }
 
@@ -616,7 +615,6 @@ function getSkinSession($db, $SkinID){
         $_SESSION['user']['SkinSVG'] = $obj->SkinSVG;
         
     }
-    return $sPantsArray;
     
 }
 
@@ -639,7 +637,6 @@ function getShirtSession($db, $ShirtID){
         $_SESSION['user']['ShirtSVG'] = $obj->ShirtSVG;
         
     }
-    return $sPantsArray;
     
 }
 
