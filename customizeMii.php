@@ -28,7 +28,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <script src="jquery-3.3.1.js"></script>
+        <!--<script src="jquery-3.3.1.js"></script>-->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         
         <script src="database.js"></script>
         <title>Create Account</title>
@@ -39,7 +40,8 @@
                     //LIGHT - FFFF99
                     //MEDIUM - c4b8a2
                     //DARK - 7c7465
-                    charHead = document.getElementById("characterHead");
+                    var charHead = document.getElementsByClassName("characterHead");
+                    charHead = charHead[0];
                     if(change == "light"){
                         
                         charHead.style.backgroundColor = "#FFFF99";
@@ -64,7 +66,8 @@
                 else if(section == "head"){
                     //SQAURE - RADIUS 0
                     //CIRCLE - RADIUS 1
-                    charHead = document.getElementById("characterHead");
+                    var charHead = document.getElementsByClassName("characterHead");
+                    charHead = charHead[0];
                     if(change == "square"){
                         
                         charHead.style.borderRadius = 0;
@@ -82,6 +85,8 @@
                     //PRUPLE - 990098
                     //RED - eb1a1a
                     charBody = document.getElementsByClassName("torso");
+                    //charBody = charBody[1];
+                    console.log(charBody);
                     if(change == "green"){
                         for(x=0;x<charBody.length;x++){
                             
@@ -118,7 +123,7 @@
                     if(change == "black"){
                         for(x=0;x<charBody.length;x++){
                             charBody[x].style.backgroundColor = "#242424";
-                        }x``
+                        }
                     }
                     else if(change == "yellow"){
                         for(x=0;x<charBody.length;x++){
@@ -291,13 +296,13 @@
             <div class="sections" id="displaySection">
                 <div id="characterDisplay">
                     <div id="character">
-                        <div id="characterHead"></div>
-                        <div id="leftArm" class="arm torso"></div>
-                        <div id="characterBody" class="torso"></div>
-                        <div id="rightArm" class="arm torso"></div>
-                        <div id="characterLegs">
-                            <div class="leg" id="leftLeg"></div>
-                            <div class="leg" id="rightLeg"></div>
+                        <div class="characterHead"></div>
+                        <div class="leftArm arm torso"></div>
+                        <div class="characterBody torso"></div>
+                        <div class="rightArm arm torso"></div>
+                        <div class="characterLegs">
+                            <div class="leg leftLeg"></div>
+                            <div class="leg rightLeg"></div>
                         </div>
                     </div>
                 </div>

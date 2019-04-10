@@ -6,6 +6,7 @@ https://phppot.com/php/simple-php-chat-using-websocket/
     class ChatHandler{
         private $names = array();
         private $miiInfo = array();
+        private $chatHistory = array();
         function sendMessage($message){
             global $clientSockets;
             $messageLen = strlen($message);
@@ -90,18 +91,24 @@ https://phppot.com/php/simple-php-chat-using-websocket/
             $messArray = null;
             if($code == 1){
                 $mess = "<div>".$chat_box_message . "</div>";
+                array_push($this->chatHistory,$chat_box_message);
                 $messArray = array('message'=>$mess,'users'=>$users,'miiInfo'=>$miis,'message_type'=>'enter');
             }
             elseif($code == 0){
                 $mess = "<div>".$chat_user . ":" . $chat_box_message . "</div>";
+                array_push($this->chatHistory,$chat_user . ":" . $chat_box_message);
                 $messArray = array('message'=>$mess,'users'=>$users,'message_type'=>'chat');
             }
             elseif($code == 2){
                 $mess = "<div>".$chat_box_message . "</div>";
+                array_push($this->chatHistory,$chat_box_message);
                 $messArray = array('message'=>$mess,'users'=>$users,'message_type'=>'exit');
             }
             
-            
+            if(count($this->chatHistory) == 25){
+                $this->chatHistory = array_shift($this->chatHistory);
+            }
+            //
             $chatMessage = $this->encloseMessage(json_encode($messArray));
             return $chatMessage;
         }

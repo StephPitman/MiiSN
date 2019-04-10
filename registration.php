@@ -153,7 +153,7 @@
             <a class = "links headerInline" href = "index.php">Home</a>
         </header>
         
-        <div id="page">
+        <div class="page">
             <form method="post" action="registration.php">
             <!--Personal Info block -OC-->
             <div class="infoSections" id = "personalInfo">

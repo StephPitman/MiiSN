@@ -37,7 +37,7 @@ header{
     font-size: 3.5em;
     font-weight: 100;
 }
-#page{
+.page{
     background-color: #FFFFFF;
     margin-left: 7em;
     margin-right:7em;
@@ -128,8 +128,8 @@ header{
 
 /*User Selection CSS Start*/
 .channels {
-    width:17em;
-    height:11em;
+    width:22em;
+    height:13em;
     border: solid;
     border-color: #D9D9D9;
     border-radius: 1em;
@@ -166,6 +166,14 @@ header{
 }
 
 /*Chat Window CSS Start */
+.subTrivBtn{
+    border-color: dodgerblue;
+    background-color: white;
+    color: dodgerblue;
+    padding-left:1em;
+    padding-right:1em;
+    float:right;
+}
 .chatBox{
     height:60%;
     width:50%;
@@ -178,10 +186,14 @@ header{
 }
 .miiInChat{
     width:19%;
-    height:90%;
+    height:80%;
     display: inline-block;
     margin:0 auto;
+    text-align: center;
     
+}
+.usernameDisplay{
+    text-align: center;
 }
 #chatBox1{
     visibility: visible;
@@ -225,6 +237,7 @@ header{
 }
 #textInput{
     clear:left;
+    width:25em;
 }
 #prevChat{
     float: left;
@@ -267,7 +280,7 @@ header{
     border-width: 5px;
 }
 .leg{
-    background-color: blue;
+    /*background-color: blue;*/
     height: 3em;
     width: 1em;
     display: inline-block;
@@ -275,7 +288,7 @@ header{
     margin: 0;
 }
 .arm{
-    background-color: red;
+    /*background-color: red;*/
     height: 1em;
     width: 3em;
     margin-bottom: 2.5em;
@@ -318,22 +331,24 @@ header{
     background-color: #c4b8a2;
 }
 #character{
-    margin-top:35%;
-    margin-left:40%;
+    /*margin-top:35%;
+    margin-left:40%;*/
+    text-align: center;
+    margin-top: 35%;
 }
-#rightArm{
+.rightArm{
     position: relative;
     right:1em;
 }
-#leftArm{
+.leftArm{
     position: relative;
     left:1em;
 }
-#leftLeg{
+.leftLeg{
     transform: rotate(15deg);
-    margin-right:2%;
+    /*margin-right:3%;*/
 }
-#rightLeg{
+.rightLeg{
     transform: rotate(-15deg);
 }
 #editSection{
@@ -382,22 +397,23 @@ header{
     color:dodgerblue;
     float:right;
 }
-#characterHead{
-    background-color: #FFFF99;
-    border-color: #FFFF99;
+.characterHead{
+    /*background-color: #FFFF99;
+    border-color: #FFFF99;*/
     height: 2em;
     width: 2em;
     border-radius: 1em;
-    margin-left: 3.25em;
+    /*margin-left: 3.25em;*/
+    margin:0 auto;
 }
-#characterBody{
-    background-color: red;
+.characterBody{
+    /*background-color: red;*/
     height: 4em;
     width: 2em;
     border-radius: 2em;
 }
-#characterLegs{
-    padding-left: 3em;
+.characterLegs{
+    /*padding-left: 3em;*/
     position: relative;
     bottom: 1em;
     
@@ -457,4 +473,11 @@ header{
     background-color: #FFFFFF;
     border-color: blue;
     color: blue;
+}
+
+
+
+/*Create Chat*/
+.createPage{
+    height:80%;
 }

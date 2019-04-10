@@ -14,12 +14,25 @@ $ch = new ChatHandler();
             var visibleUsers = [];
             var visibleMiiInfo = [];
             function showMessage(messageHTML) {
+                //console.log($("#prevChat div").length);
                 $('#prevChat').append(messageHTML);
+                if($("#prevChat div").length >= 25){
+                    $("#prevChat div").first().remove();
+                }
+                var messagesSent = "[";
+                for(var x=0;x<$("#prevChat div").length;x++){
+                    //console.log($("#prevChat div").get(x));
+                    messagesSent = messagesSent + $("#prevChat div").get(x).textContent;
+                    if(x != $("#prevChat div").length-1){
+                        messagesSent = messagesSent + ",";
+                    }
+                }
+                messagesSent = messagesSent + "]";
+                // ______________________________________________________SEND HISTORY TO DATABASE
+                //console.log(messagesSent);
             }
             function updateMiis(){
                 $('.miiInChat').remove();
-                
-                <?php $p = 0; ?>
                 for(var x=0;x<visibleUsers.length;x++){
                     $('#miis').append("<div class='miiInChat' id='user"+x+"'><div class='chatCharacter'><div id='chatBox"+x+"' class='chatbox'></div><div class='characterHead' id='userHead"+x+"'></div><div class='leftArm arm torso userArm"+x+"'></div><div class='characterBody torso' id='userTorso"+x+"'></div><div class='rightArm arm torso userArm"+x+"'></div><div class='characterLegs'><div class='leg leftLeg userLeg"+x+"'></div><div class='leg rightLeg userLeg"+x+"'></div></div></div><p class='usernameDisplay'>"+visibleUsers[x]+"</p></div>");
                     $("#user"+x+" #userHead"+x).css("background-color", visibleMiiInfo[x][0]);
@@ -33,9 +46,7 @@ $ch = new ChatHandler();
                         $("#user"+x+" #chatBox"+x).css("visibility","hidden");
                     }
                     
-                    <?php $p++;?>
                 }
-                <?php $p=0;?>
                 
                 
             }
@@ -45,6 +56,7 @@ $ch = new ChatHandler();
                 THIS SECTION USED THE TECHNIQUES GIVEN FROM THIS LINK/WEBSITE
                 https://phppot.com/php/simple-php-chat-using-websocket/
                 */
+
                 var websocket = new WebSocket("ws://localhost:8090/socketCode.php"); 
                 websocket.onopen = function(event){
                     var messageJSON = {
@@ -56,11 +68,17 @@ $ch = new ChatHandler();
                         code:1
                     };
                     websocket.send(JSON.stringify(messageJSON));
+                    // ______________________________________________________GET HISTORY
+                    var chatHistory = '[apple,green,pie,eggs]';
+                    chatHistory = chatHistory.substr(1,chatHistory.length-2).split(",");
+                    for(var x = 0;x< chatHistory.length;x++){
+                        $("#prevChat").append("<div>"+chatHistory[x]+"</div>");
+                    }
                 }
                 websocket.onmessage = function(event) {
                     
                     var d = JSON.parse(event.data);
-                    console.log(d.message);
+                    //console.log(d.message);
                     var c = false;
                     var x = 0;
                     var y = 0;
@@ -87,15 +105,15 @@ $ch = new ChatHandler();
                     }
                     if(d.message != "<div>:</div>"){
                         showMessage(d.message);
-                        console.log(d.message_type);
+                        //console.log(d.message_type);
                         if(d.message_type != "enter" && d.message_type != "exit"){
                             var sentUser = d.message.split(":")[0].split("<div>")[1];
                             var chatUser = visibleUsers.indexOf(sentUser);
-                            console.log(sentUser);
+                            //console.log(sentUser);
                             $("#user"+chatUser+" #chatBox"+chatUser).css("visibility","visible");
                             $("#user"+chatUser+" #chatBox"+chatUser+" p").remove();
                             $("#user"+chatUser+" #chatBox"+chatUser).append("<p>"+d.message.split(":")[1].split("</div>")[0]+"</p>");
-                            console.log("HERE");
+                            //console.log("HERE");
                         }
                         
                     }
