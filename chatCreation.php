@@ -2,6 +2,7 @@
     include "database/databaseConfig.php";
     $dbCon = getDB();
     $chatNameBG = "#FFFFFF";
+    $idBG = "#FFFFFF";
 
 ?>
 <!DOCTYPE>
@@ -17,45 +18,85 @@
             <a class = "links headerInline" href = "index.php">Home</a>
         </header>
         <div class="page createPage">
-            <?php
-                if($_SERVER["REQUEST_METHOD"]=="POST"){
-                       if(isset($_POST['cName']) && $_POST['cName'] != "" ){
-                           //________________________________________________________FIX THIS WITH CHAT NAME
-                           //createChat($dbCon, $_SESSION['user']['username']);
-                            header("LOCATION: userSelection.php");   
-                       }
-                       else{
-                           $chatNameBG = "#F5C5C5";
-                           
-                       }
-                
-            ?>
-            <form method="post" action="chatCreation.php">
+            
             <div class="infoSections" id = "personalInfo">
                 <table>
                     <tr>
                         <td>
-                            Chat Name:
+                            <form method="post" action="chatCreation.php">
+                            <table>
+                                <tr>
+                                    <td>
+                                        Chat Name:
+                                    </td>
+                                    <td>
+                                        <input type="text" name="cName" style="background-color:<?php echo $chatNameBG?>"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" value="Create"/>
+                                    </td>
+                                    <td>
+                                        <?php
+                                            //inputs new created chat info into database
+                                            if($_SERVER["REQUEST_METHOD"]=="POST"){
+                                               if(isset($_POST['cName']) && $_POST['cName'] != "" ){
+                                                   //________________________________________________________FIX THIS WITH CHAT NAME
+                                                    createChat($dbCon,$_POST['cName'],$_SESSION['user']['username']);
+                                                    header("LOCATION: userSelection.php");   
+                                               }
+                                               else{
+                                                   $chatNameBG = "#F5C5C5";
+                                                    echo "<p>Please input a name for the new chat</p>";
+                                                }
+                                            }
+                                        ?>
+
+                                    </td>
+                                </tr>
+                            </table>
+                            </form>
                         </td>
                         <td>
-                            <input type="text" name="cName" style="background-color:<?php echo $chatNameBG?>"/>
+                            <form method="post" action="chatCreation.php">
+                            <table>
+                                <tr>
+                                    <td>
+                                        Join a Chat By Entering a Chat ID:
+                                    </td>
+                                    <td>
+                                        <input type="text" name="chatIdNum" style="background-color:<?php echo $idBG; ?>"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" value="Join"/>
+                                    </td>
+                                    <td>
+                                        <?php
+                                            if($_SERVER["REQUEST_METHOD"]=="POST"){
+                                                if(isset($_GET['chatIdNum']) && $_GET['chatIdNum'] != ""){
+                                                    // ________________________________________________________ADD USER TO MEMBERS DB WITH THE ID AND NAME
+                                                    
+                                                    header("LOCATION: userSelection.php");
+                                                }
+                                                else{
+                                                    $idBG = '#F5C5C5';
+                                                    echo "<p>In order to join a chat</p>";
+                                                }
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
+                            </table>
+                            </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <input type="submit"/>
-                        </td>
-                        <td>
-                            <?php
-                                echo "<p>Please input a name for the new chat</p>";
-                            }
-                            ?>
-                            
-                        </td>
-                    </tr>
+                    
                 </table>
             </div>
-            </form>
+            
             
         </div>
     </body>
