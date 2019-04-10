@@ -21,16 +21,18 @@ CREATE TABLE IF NOT EXISTS `tbchats` (
   `ChatID` smallint(6) NOT NULL,
   `ChatLog` longtext,
   `Admin` varchar(16) NOT NULL,
-  `Password` varchar(16) NOT NULL COMMENT 'If a admin wants to put a password on the chat',
+  `Password` varchar(16) DEFAULT NULL COMMENT 'If a admin wants to put a password on the chat',
+  `Name` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`ChatID`),
   KEY `FK_tbchats_tbuserinfo` (`Admin`),
   CONSTRAINT `FK_tbchats_tbuserinfo` FOREIGN KEY (`Admin`) REFERENCES `tbuserinfo` (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This holds all the information on chats';
 
--- Dumping data for table miisindb.tbchats: ~0 rows (approximately)
+-- Dumping data for table miisindb.tbchats: ~2 rows (approximately)
 /*!40000 ALTER TABLE `tbchats` DISABLE KEYS */;
-INSERT INTO `tbchats` (`ChatID`, `ChatLog`, `Admin`, `Password`) VALUES
-	(0, NULL, 'MSN4Lyfe', '');
+INSERT INTO `tbchats` (`ChatID`, `ChatLog`, `Admin`, `Password`, `Name`) VALUES
+	(0, 'Weather man', 'MSN4Lyfe', '', NULL),
+	(1, NULL, 'Sloth', NULL, 'Squash');
 /*!40000 ALTER TABLE `tbchats` ENABLE KEYS */;
 
 -- Dumping structure for table miisindb.tbemailinfo
@@ -40,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `tbemailinfo` (
   PRIMARY KEY (`EmailID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COMMENT='This holds the user''s email';
 
--- Dumping data for table miisindb.tbemailinfo: ~12 rows (approximately)
+-- Dumping data for table miisindb.tbemailinfo: ~11 rows (approximately)
 /*!40000 ALTER TABLE `tbemailinfo` DISABLE KEYS */;
 INSERT INTO `tbemailinfo` (`EmailID`, `Email`) VALUES
 	(1, 'nathanskof@gmail.com'),
@@ -109,7 +111,8 @@ CREATE TABLE IF NOT EXISTS `tbmemberchatids` (
 -- Dumping data for table miisindb.tbmemberchatids: ~0 rows (approximately)
 /*!40000 ALTER TABLE `tbmemberchatids` DISABLE KEYS */;
 INSERT INTO `tbmemberchatids` (`ChatID`, `Username`) VALUES
-	(0, 'MSN4Lyfe');
+	(0, 'MSN4Lyfe'),
+	(1, 'Sloth');
 /*!40000 ALTER TABLE `tbmemberchatids` ENABLE KEYS */;
 
 -- Dumping structure for table miisindb.tbmii
@@ -130,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `tbmii` (
   CONSTRAINT `FK_tbmii_tbskin` FOREIGN KEY (`SkinID`) REFERENCES `tbskin` (`SkinID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COMMENT='This table holds all of the information of a user''s Mii';
 
--- Dumping data for table miisindb.tbmii: ~12 rows (approximately)
+-- Dumping data for table miisindb.tbmii: ~11 rows (approximately)
 /*!40000 ALTER TABLE `tbmii` DISABLE KEYS */;
 INSERT INTO `tbmii` (`MiiID`, `HeadID`, `ShirtID`, `PantsID`, `SkinID`) VALUES
 	(1, 0, 0, 0, 0),
@@ -212,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `tbuserinfo` (
   CONSTRAINT `FK_tbuserinfo_tbmii` FOREIGN KEY (`MiiID`) REFERENCES `tbmii` (`MiiID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This table holds all of the informatin for the user';
 
--- Dumping data for table miisindb.tbuserinfo: ~12 rows (approximately)
+-- Dumping data for table miisindb.tbuserinfo: ~3 rows (approximately)
 /*!40000 ALTER TABLE `tbuserinfo` DISABLE KEYS */;
 INSERT INTO `tbuserinfo` (`Username`, `Password`, `EmailID`, `MiiID`, `Firstname`, `Lastname`, `Salt`) VALUES
 	('MSN4Lyfe', 'password', 1, 2, '', '', ''),
