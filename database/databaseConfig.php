@@ -31,9 +31,9 @@ function getDB()
 function addUsertoChat($db, $User, $ChatID){
     //This function will add a user to a chat by adding their username and the chatID to tbMemberChatIDs
     
-    $User = mysql_real_escape_string($User);
+    $User = ($User);
     
-    $ChatID = mysql_real_escape_string($ChatID);
+    $ChatID = ($ChatID);
     
     //Make sure the database, user name and Chat Id are all set
     if (isset($db) and isset($User) and isset($ChatID)){
@@ -53,11 +53,11 @@ function createChat($db, $ChatName, $User, $Pass = ""){
     //This function will create a chat that will allow for
     //a user to create a chat.
     
-    $ChatName = mysql_real_escape_string($ChatName);
+    $ChatName = ClearInjection($ChatName);
     
-    $User = mysql_real_escape_string($User);
+    $User = ClearInjection($User);
     
-    $Pass = mysql_real_escape_string($Pass);
+    $Pass = ClearInjection($Pass);
     
     //Make sure the database is set
     if (isset($db)){
@@ -97,9 +97,9 @@ function createChat($db, $ChatName, $User, $Pass = ""){
 function updateChat($db, $sChat, $sChatID){
     //will update the chat log with the most recent chat.    
     
-    $sChatID = mysql_real_escape_string($sChatID);
+    $sChatID = ($sChatID);
     
-    $sChat = mysql_real_escape_string($sChat);
+    $sChat = ClearInjection($sChat);
     
     //Make sure the database is set
     if(isset($db)){
@@ -124,7 +124,7 @@ function updateChat($db, $sChat, $sChatID){
 function getChat($db, $ChatID){
     //Returns the chat log based on the chat id
     
-    $sChatID = mysql_real_escape_string($sChatID);
+    $sChatID = ($sChatID);
     
     
     //Make sure the database is set
@@ -156,27 +156,56 @@ function runQuery($db, $query) {
 	// takes a reference to the DB and a query and returns the results of running the query on the database
 }
 
-
+function ClearInjection($string){
+    //This function will clear any injections
+    //and will return the string
+    
+    
+    if (isset($string)){
+        
+        $string = str_replace("drop","",$string);
+        
+        $string = str_replace("DROP","",$string);
+        
+        $string = str_replace(";","",$string);
+        
+        $string = str_replace("table","",$string);
+        
+        $string = str_replace("TABLE","",$string);
+        
+        $string = str_replace("'", "",$string);
+        
+        $string = str_replace("-","",$string);
+        
+        $string = str_replace("remove","",$string);
+        
+        $string = str_replace("REMOVE","",$string);
+        
+        return $string;
+        
+    }
+    
+    
+}
 
 function createAccount($db, $sEmail, $sUser, $sPass, $salt, $First, $Last){
     //This function will add a new member to the database.
     $iMiiID;
     $iEmailID;
 	
-    $sEmail = mysql_real_escape_string($sEmail);
+    $sEmail = ClearInjection($sEmail);
     
-    $sUser = mysql_real_escape_string($sUser);
+    $sUser = ClearInjection($sUser);
     
-    $sPass = mysql_real_escape_string($sPass);
+    $sPass = ClearInjection($sPass);
     
-    $First = mysql_real_escape_string($First);
+    $First = ClearInjection($First);
     
-    $Last = mysql_real_escape_string($Last);
+    $Last = ClearInjection($Last);
     
     //Check to see if the database is set 
     if (isset($db)){
         
-        mysql_real_escape_string()
 	    
         //Make sure the username, password and email are not empty
         if (!empty($sUser) and !empty($sPass) and !empty($salt) and !empty($sEmail) and !empty($First) and !empty($Last)){
@@ -221,7 +250,7 @@ function checkLogin($db, $User, $Pass){
     //$Pass is the password being passed
     //$db is the database connection
     
-    $sChatID = mysql_real_escape_string($User);
+    $sChatID = ($User);
     
     
     $bChecked = false;
@@ -346,7 +375,7 @@ function checkUser($db, $sUser){
     //Returns false if the users does exists
     $bFound = true;
     
-    $sChatID = mysql_real_escape_string($User);
+    $sChatID = ($User);
     
     if (isset($sUser)){
         
@@ -378,7 +407,7 @@ function checkEmail($db, $sEmail){
     $bFound = true;
     
     
-    $sEmail = mysql_real_escape_string($sEmail);
+    $sEmail = ($sEmail);
     
     if (isset($sEmail)){
         
@@ -422,7 +451,7 @@ function updateMiiInfo($db){
 function getChatName($db, $ChatID){
     //Will return the chat name give the chat id and a database connection
     
-    $ChatID = mysql_real_escape_string($ChatID);
+    $ChatID = ($ChatID);
         
     //Make sure the database is set
     if (isset($db)){
