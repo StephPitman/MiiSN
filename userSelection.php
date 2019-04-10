@@ -42,12 +42,11 @@
                     $rowCount = 0;
                     //prints 3 or less chat butttons in a row
                     while($rowCount < 3 && $overallCount < count($chats)){
-                        //_______________________________________________________________CHANGE SO THAT GETS CHAT NAME FROM ID
-                        echo "<td onclick='goToChat(".$chats[$overallCount].")  class='menuOption'>
+                        echo "<td  class='menuOption'>
                             <form action='chatWindow.php' method='post'>
-                            <input type='hidden' name='id' value='3'/>
+                            <input type='hidden' name='id' value='".$chats[$overallCount][0]."'/>
                             <button type='submit' class='channels menuLinks'>
-                                <p>".$chats[$overallCount]."</p>
+                                <p>".getChatName($dbCon,$chats[$overallCount][0])."</p>
                             </button>
                             </form>
                             </td>";
@@ -77,12 +76,11 @@
                     <?php
                     //print 3 or less chat buttons in a row
                     while($rowCount < 3 && $overallCount < count($chats)){
-                        //_______________________________________________________________CHANGE SO THAT GETS CHAT NAME FROM ID
-                        echo "<td onclick='goToChat(".$chats[$overallCount].") class='menuOption'>
+                        echo "<td  class='menuOption'>
                             <form action='chatWindow.php' method='post'>
-                            <input type='hidden' name='id' value=".$chats[$overallCount]."/>
-                            <button class='channels menuLinks'>
-                                <p>".$chats[$overallCount]."</p>
+                            <input type='hidden' name='id' value='".$chats[$overallCount][0]."'/>
+                            <button type='submit' class='channels menuLinks'>
+                                <p>".getChatName($dbCon,$chats[$overallCount][0])."</p>
                             </button>
                             </form>
                             </td>";
@@ -112,12 +110,11 @@
                     <?php
                     //prints 3 or less chat buttons in a row
                     while($rowCount < 3 && $overallCount < count($chats)){
-                        //_______________________________________________________________CHANGE SO THAT GETS CHAT NAME FROM ID
-                        echo "<td onclick='goToChat(".$chats[$overallCount].") class='menuOption'>
+                        echo "<td  class='menuOption'>
                             <form action='chatWindow.php' method='post'>
-                            <input type='hidden' name='id' value=".$chats[$overallCount]."/>
-                            <button class='channels menuLinks'>
-                                <p>".$chats[$overallCount]."</p>
+                            <input type='hidden' name='id' value='".$chats[$overallCount][0]."'/>
+                            <button type='submit' class='channels menuLinks'>
+                                <p>".getChatName($dbCon,$chats[$overallCount][0])."</p>
                             </button>
                             </form>
                             </td>";

@@ -42,9 +42,8 @@
                                             //inputs new created chat info into database
                                             if($_SERVER["REQUEST_METHOD"]=="POST"){
                                                if(isset($_POST['cName']) && $_POST['cName'] != "" ){
-                                                   //________________________________________________________FIX THIS WITH CHAT NAME
                                                     createChat($dbCon,$_POST['cName'],$_SESSION['user']['username']);
-                                                    header("LOCATION: userSelection.php");   
+                                                    //header("LOCATION: userSelection.php");   
                                                }
                                                else{
                                                    $chatNameBG = "#F5C5C5";
@@ -76,14 +75,13 @@
                                     <td>
                                         <?php
                                             if($_SERVER["REQUEST_METHOD"]=="POST"){
-                                                if(isset($_GET['chatIdNum']) && $_GET['chatIdNum'] != ""){
-                                                    // ________________________________________________________ADD USER TO MEMBERS DB WITH THE ID AND NAME
-                                                    
+                                                if(isset($_POST['chatIdNum']) && $_POST['chatIdNum'] != ""){ 
+                                                    addUsertoChat($dbCon,$_SESSION['user']['username'],$_POST['chatIdNum']);
                                                     header("LOCATION: userSelection.php");
                                                 }
                                                 else{
                                                     $idBG = '#F5C5C5';
-                                                    echo "<p>In order to join a chat</p>";
+                                                    echo "<p>Inpit chat ID to join a chat</p>";
                                                 }
                                             }
                                         ?>
