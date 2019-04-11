@@ -84,9 +84,9 @@
                     //GREEN - 04b804
                     //PRUPLE - 990098
                     //RED - eb1a1a
-                    charBody = document.getElementsByClassName("torso");
+                    var charBody = document.getElementsByClassName("torso");
                     //charBody = charBody[1];
-                    console.log(charBody);
+                    //console.log(charBody);
                     if(change == "green"){
                         for(x=0;x<charBody.length;x++){
                             
@@ -119,7 +119,8 @@
                     //BLACK - 242424
                     //YELLOW - d5d50b
                     //BLUE - 0404b8
-                    charBody = document.getElementsByClassName("leg");
+                    
+                    var charBody = document.getElementsByClassName("leg");
                     if(change == "black"){
                         for(x=0;x<charBody.length;x++){
                             charBody[x].style.backgroundColor = "#242424";
@@ -144,7 +145,6 @@
             } 
          
             $(document).ready(function() {
-                
                 updateOptionCSS("skin", "<?php 
                                 echo ($_SESSION['user']['SkinSVG']); ?>");
                 

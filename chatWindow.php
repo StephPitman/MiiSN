@@ -2,7 +2,7 @@
 <?php  
 include "database/databaseConfig.php";
 include "chatHandler.php";
-include "userPresent.php";
+//include "userPresent.php";
 $ch = new ChatHandler();
 $dbCon = getDB();
 $chatId = 0;

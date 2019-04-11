@@ -124,7 +124,7 @@ function updateChat($db, $sChat, $sChatID){
 function getChat($db, $ChatID){
     //Returns the chat log based on the chat id
     
-    $sChatID = ($sChatID);
+    $sChatID = ($ChatID);
     
     
     //Make sure the database is set
@@ -499,7 +499,7 @@ function getChatIDs($db){
             
             return $obj;
             
-            / //   $obj =(getChatIDs($dbCon));
+             //   $obj =(getChatIDs($dbCon));
             
             //Will return array $obj[][]
            // foreach ($obj as $x){
@@ -593,7 +593,6 @@ function getHeadSession($db, $HeadID){
         $_SESSION['user']['HeadSVG'] = $obj->HeadSVG;
         
     }
-    return $sPantsArray;
     
 }
 
@@ -616,7 +615,6 @@ function getSkinSession($db, $SkinID){
         $_SESSION['user']['SkinSVG'] = $obj->SkinSVG;
         
     }
-    return $sPantsArray;
     
 }
 
@@ -639,7 +637,6 @@ function getShirtSession($db, $ShirtID){
         $_SESSION['user']['ShirtSVG'] = $obj->ShirtSVG;
         
     }
-    return $sPantsArray;
     
 }
 
